@@ -1,0 +1,156 @@
+<ol class="breadcrumb">
+    <li class="breadcrumb-item active">Cadastro</li>
+</ol>
+
+<div class="container">
+    <div *ngIf="erro" class="alert alert-danger m-3">
+        Email já existe.
+    </div>
+    <div *ngIf="sucesso" class="alert alert-success m-3">
+        Perfil cadastrado com sucesso. <a routerLink="/login">Clique aqui</a> para acessar o nosso site.
+    </div>
+    <div class="navbar">
+        <div class="col-md-6">
+            <button type="button" class="btn btn-dark" *ngIf="cientista" (click)="cadastroCientista()"
+                role="button">Cadastro de cientistas</button>
+            <button type="button" class="btn btn-light" *ngIf="!cientista" (click)="cadastroCientista()"
+             role="button">Cadastro de cientistas</button>
+        </div>
+        <div class="col-md-6">
+            <button type="button" class="btn btn-dark" *ngIf="comum" (click)="cadastroComum()" role="button">Cadastro
+                de usuário comum</button>
+            <button type="button" class="btn btn-light" *ngIf="!comum" (click)="cadastroComum()" role="button">Cadastro de
+                usuário comum</button>
+        </div>
+    </div>
+
+    <div *ngIf="!sucesso">
+        <form *ngIf="cientista" ngNativeValidate class="mt-2">
+
+            <!--Cadatro de cientistas-->
+            <div class="row container">
+                <div class="col-md-6 mr-2">
+                    <div class="form-group row">
+                        <input type="text" class="form-control" name="nomePessoa" [(ngModel)]="infos.nomePessoa" placeholder="Nome"
+                            required="true">
+                    </div>
+
+                    <div class="form-group row">
+                        <input type="email" class="form-control" name="email" [(ngModel)]="pessoa.email"
+                            placeholder="Email" required="true">
+                    </div>
+
+                    <div class="form-group row">
+                        <input type="password" class="form-control" name="senha" [(ngModel)]="pessoa.senha"
+                            placeholder="Senha" required="true">
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="input-group">
+                            <div class="input-group-pretend">
+                                <label for="dataNascimento" class="input-group-text">
+                                    Data de Nascimento
+                                </label>
+                            </div>
+                            <input type="date" class="form-control" name="dataNascimento" id="dataNascimento"
+                                [(ngModel)]="infos.dataNascimento" required="true">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="input-group">
+                            <div class="input-group-pretend">
+                                <label for="dataComecoTrabalhar" class="input-group-text">
+                                    Data em que começou a trabalhar
+                                </label>
+                            </div>
+                            <input type="date" class="form-control" name="dataInicioCientista" id="dataComecoTrabalhar"
+                                [(ngModel)]="infos.dataInicioCientista" required="true">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <input type="text" class="form-control" name="cidade" [(ngModel)]="trabalho.cidadeOndeTrabalha"
+                            placeholder="Cidade onde trabalha" required="true">
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group row">
+                        <input type="text" class="form-control" name="estado" [(ngModel)]="trabalho.estadoOndeTrabalha"
+                            placeholder="Estado onde trabalha" required="true">
+                    </div>
+                    <div class="form-group row">
+                        <input type="text" class="form-control" name="nomeInstituicao"
+                            [(ngModel)]="trabalho.nomeInstituicao" placeholder="Instituição onde trabalha"
+                            required="true">
+                    </div>
+
+                    <div class="form-group row">
+                        <input type="text" class="form-control" name="nivelFormacao"
+                            [(ngModel)]="formacao.nivelDeFormacao" placeholder="Nível de Formacao" required="true">
+                    </div>
+
+                    <div class="form-group row">
+                        <input type="text" class="form-control" name="localFormacao"
+                            [(ngModel)]="formacao.localDeFormacao" placeholder="Local de Formacao" required="true">
+                    </div>
+                    <div class="form-group row">
+                        <input type="url" class="form-control" name="curriculo" [(ngModel)]="curriculo.link"
+                            placeholder="Link para seu Curriculo Lattes" required="true">
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" (click)="onSubmitCientista()" class="btn btn-dark mr-2">Confirmar</button>
+        </form>
+    </div>
+
+    <div *ngIf="!sucesso">
+        <form *ngIf="!cientista" ngNativeValidate class="mt-2">
+
+            <!--Cadatro de usuario comum-->
+            <div class="container">
+                <div class="form-group row">
+                    <input type="text" class="form-control" name="nomePessoa" [(ngModel)]="infos.nomePessoa" placeholder="Nome"
+                        required="true">
+                </div>
+
+                <div class="form-group row">
+                    <input type="email" class="form-control" name="email" [(ngModel)]="pessoa.email" placeholder="Email"
+                        required="true">
+                </div>
+
+                <div class="form-group row">
+                    <input type="password" class="form-control" name="senha" [(ngModel)]="pessoa.senha"
+                        placeholder="Senha" required="true">
+                </div>
+
+                <div class="form-group row">
+                    <div class="input-group">
+                        <div class="input-group-pretend">
+                            <label for="dataNascimento" class="input-group-text">
+                                Data de Nascimento
+                            </label>
+                        </div>
+                        <input type="date" class="form-control" name="dataNascimento" id="dataNascimento"
+                            [(ngModel)]="infos.dataNascimento" required="true">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <input type="text" class="form-control" name="nivelFormacao"
+                        [(ngModel)]="formacao.nivelDeFormacao" placeholder="Nível de Formacao" required="true">
+                </div>
+
+                <div class="form-group row">
+                    <input type="text" class="form-control" name="localFormacao"
+                        [(ngModel)]="formacao.localDeFormacao" placeholder="Local de Formacao" required="true">
+                </div>
+            </div>
+
+            <button *ngIf="!sucesso" type="submit" (click)="onSubmitComum()" class="btn btn-dark mr-2">Confirmar</button>
+
+        </form>
+    </div>
+
+</div>

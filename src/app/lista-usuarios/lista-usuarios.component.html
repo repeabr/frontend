@@ -1,0 +1,15 @@
+<div *ngIf="membros" class="container">
+    <div class="row">
+        <div *ngFor="let m of membros">
+            <div class="card m-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{m.infos?.nomePessoa}}</h5>
+                    <p class="card-text"><b>Email: </b>{{m?.email}}</p>
+                    <p class="card-text"><b>Nivel de formação: </b>{{m.formacao?.nivelDeFormacao}}</p>
+                    <p class="card-text"><b>Local de formação: </b>{{m.formacao?.localDeFormacao}}</p>
+                    <button class="btn btn-primary" (click)="goToPerfil(m.email)">Ver página de {{m.infos?.nomePessoa}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

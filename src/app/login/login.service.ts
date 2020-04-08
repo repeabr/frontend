@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 })
 export class LoginService {
 
-  url = "http://localhost:8080/redesocial/pessoa"
+  url = "https://server-r-backend.herokuapp.com/redesocial/pessoa"
 
   constructor(private http: HttpClient) { }
 

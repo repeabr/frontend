@@ -16,6 +16,7 @@ export class PerfilComponent implements OnInit {
   info: InfoAdicionais = new InfoAdicionais();
   interesses: Interesse[] = [];
   trabalho: Trabalho = new Trabalho();
+  temInteresses: boolean;
   
   cientista: boolean;
   dataNascimento: string;
@@ -32,19 +33,13 @@ export class PerfilComponent implements OnInit {
       data => {
         this.pessoa = data;
         
-        this.curriculo.link = data.curriculo.link;
+        this.curriculo = data.curriculo;
 
-        this.formacao.nivelDeFormacao = data.formacao.nivelDeFormacao;
-        this.formacao.localDeFormacao = data.formacao.localDeFormacao;
+        this.formacao = data.formacao;
 
-        this.info.nomePessoa = data.infos.nomePessoa;
-        this.info.dataNascimento = data.infos.dataNascimento;
-        this.info.dataInicioCientista = data.infos.dataInicioCientista;
-        this.info.cpf = data.infos.cpf;
+        this.info = data.infos;
 
-        this.trabalho.nomeInstituicao = data.trabalho.nomeInstituicao;
-        this.trabalho.cidadeOndeTrabalha = data.trabalho.cidadeOndeTrabalha;
-        this.trabalho.estadoOndeTrabalha = data.trabalho.estadoOndeTrabalha;
+        this.trabalho = data.trabalho;
         
         let str = data.infos.dataNascimento;
         let array = str.split("-");
@@ -65,7 +60,11 @@ export class PerfilComponent implements OnInit {
           this.tempoEmAtividade = final2.toString() + " ano(s)";
         }
 
-        
+        if(data.interesses.length == 0){
+          this.temInteresses = false;
+        } else {
+          this.temInteresses = true;
+        }
       }
     );
     this.cientista = this.verificarPessoa();

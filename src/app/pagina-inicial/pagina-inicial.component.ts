@@ -9,7 +9,6 @@ import { Pessoa, InfoAdicionais, Curriculo, Formacao, Interesse, Trabalho } from
 })
 export class PaginaInicialComponent implements OnInit {
 
-  email = localStorage.getItem("email");
   pessoa: Pessoa = new Pessoa();
 
   curriculo: Curriculo = new Curriculo();
@@ -17,6 +16,7 @@ export class PaginaInicialComponent implements OnInit {
   infos: InfoAdicionais = new InfoAdicionais();
   interesses: Interesse[] = [];
   trabalho: Trabalho = new Trabalho();
+  temInteresses: boolean;
   
   cientista: boolean;
   dataNascimento: string;
@@ -30,24 +30,17 @@ export class PaginaInicialComponent implements OnInit {
   }
 
   getPessoa() {
-    this.pessoaService.getPessoaByEmail(this.email).subscribe(
+    this.pessoaService.getPessoaByEmail(localStorage.getItem("email")).subscribe(
       data => {
         this.pessoa = data;
+        
+        this.curriculo = this.pessoa.curriculo;
 
-        this.curriculo.link = data.curriculo.link;
+        this.formacao = data.formacao;
 
-        this.formacao.nivelDeFormacao = data.formacao.nivelDeFormacao;
-        this.formacao.localDeFormacao = data.formacao.localDeFormacao;
+        this.infos = data.infos;
 
-        this.infos.nomePessoa = data.infos.nomePessoa;
-        this.infos.dataNascimento = data.infos.dataNascimento;
-        this.infos.dataInicioCientista = data.infos.dataInicioCientista;
-        this.infos.cpf = data.infos.cpf;
-
-        this.trabalho.nomeInstituicao = data.trabalho.nomeInstituicao;
-        this.trabalho.cidadeOndeTrabalha = data.trabalho.cidadeOndeTrabalha;
-        this.trabalho.estadoOndeTrabalha = data.trabalho.estadoOndeTrabalha;
-
+        this.trabalho = data.trabalho;
         let str = data.infos.dataNascimento;
         let array = str.split("-");
         let final = array[2] + "/" + array[1] + "/" + array[0];
@@ -65,6 +58,12 @@ export class PaginaInicialComponent implements OnInit {
         } else {
           let final2 = Math.floor(days / 365);
           this.tempoEmAtividade = final2.toString() + " ano(s)";
+        }
+
+        if(data.interesses.length == 0){
+          this.temInteresses = false;
+        } else {
+          this.temInteresses = true;
         }
 
         this.cientista = this.verificarPessoa();

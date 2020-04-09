@@ -4,7 +4,7 @@
 </ol>
 
 <div class="container">
-    <divclass="alert alert-info">
+    <div class="alert alert-info">
         <table class="table table-borderless">
             <thead>
                 <tr>
@@ -12,14 +12,16 @@
                     <th scope="col"></th>
                 </tr>
             </thead>
-            <tbody  *ngIf="!jaTemInteresse" >
-                <tr *ngFor="let i of selecionados">
-                    <td>{{i}}</td>
-                    <td>
-                        <button class="btn btn-dark" (click)="remover(i)">Remover</button>
-                    </td>
-                </tr>
-            </tbody>
+            <div *ngIf="!jaTemInteresse">
+                <tbody *ngFor="let i of selecionados">
+                    <tr>
+                        <td>{{i}}</td>
+                        <td>
+                            <button class="btn btn-dark" (click)="remover(i)">Remover</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </div>            
         </table>
     </div>    
 

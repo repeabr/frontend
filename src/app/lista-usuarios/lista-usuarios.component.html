@@ -3,9 +3,12 @@
     <li class="breadcrumb-item active">Membros</li>
 </ol>
 
-<div *ngIf="membros" class="container">
+<div *ngIf="temMembros" class="container">
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Pesquisar..." [(ngModel)]="searchText">
+    </div>
     <div class="row">
-        <div *ngFor="let m of membros">
+        <div *ngFor="let m of membros | filter: searchText">
             <div class="card m-3">
                 <div class="card-body">
                     <h5 class="card-title">{{m.infos?.nomePessoa}}</h5>
@@ -17,4 +20,8 @@
             </div>
         </div>
     </div>
+</div>
+
+<div *ngIf="!temMembros" class="container">
+    <h3>Não há outros membros </h3>
 </div>

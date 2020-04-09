@@ -7,7 +7,7 @@ export class Pessoa{
     curriculo: Curriculo;
     formacao: Formacao;
     infos: InfoAdicionais;
-    interesses: Interesse[];
+    interesses: string;
     trabalho: Trabalho;
 }
 
@@ -27,7 +27,7 @@ export class InfoAdicionais {
     cpf: string;
 }
 
-export class Interesse{
+export class Glossario{
     nome: string;
     status: string;
 }
@@ -41,7 +41,6 @@ export class Trabalho{
 //-------------------------------------------------
 export class Post{
     id: number;
-
     publicacao: Publicacao;
 }
 

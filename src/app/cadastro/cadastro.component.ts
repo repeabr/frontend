@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PessoaService } from '../service/pessoa.service';
-import { Pessoa, Curriculo, Formacao, InfoAdicionais, Interesse, Trabalho } from '../model/model';
+import { Pessoa, Curriculo, Formacao, InfoAdicionais, Trabalho } from '../model/model';
 
 @Component({
   selector: 'app-cadastro',
@@ -14,18 +14,18 @@ export class CadastroComponent implements OnInit {
   curriculo: Curriculo = new Curriculo();
   formacao: Formacao = new Formacao();  
   infos: InfoAdicionais = new InfoAdicionais();
-  interesse: Interesse[] = [];
   trabalho: Trabalho = new Trabalho();
 
   sucesso = false;
   erro = false;
-  submiter = false;
+  submiter = true;
   cientista = true;
   comum = false;
 
   constructor(private pessoaService: PessoaService) { }
 
   ngOnInit() {
+    console.log(this.submiter);
   }
   
   cadastroCientista(){
@@ -38,7 +38,8 @@ export class CadastroComponent implements OnInit {
     this.comum = true;
   }
 
-  onSubmitCientista(){
+  onSubmitCientista(){    
+    this.submiter = false;   
     if(this.infos.nomePessoa != null &&
       this.pessoa.email != null &&
       this.pessoa.senha != null &&
@@ -53,11 +54,9 @@ export class CadastroComponent implements OnInit {
         this.pessoa.curriculo = this.curriculo;
         this.pessoa.formacao = this.formacao;
         this.pessoa.infos = this.infos;
-        this.pessoa.interesses = this.interesse;
         this.pessoa.trabalho = this.trabalho;
-        this.submiter = true;   
     }
-    if(this.submiter){
+    if(!this.submiter){
       this.pessoaService.getPessoaByEmail(this.pessoa.email).subscribe(
         data => {
           if(data == null){
@@ -78,6 +77,7 @@ export class CadastroComponent implements OnInit {
   }
 
   onSubmitComum(){
+    this.submiter = false;   
     if(this.infos.nomePessoa != null &&
       this.pessoa.email != null &&
       this.pessoa.senha != null &&
@@ -86,9 +86,8 @@ export class CadastroComponent implements OnInit {
       this.formacao.localDeFormacao != null) {        
         this.pessoa.formacao = this.formacao;
         this.pessoa.infos = this.infos;
-        this.submiter = true;   
     }
-    if(this.submiter){
+    if(!this.submiter){
       this.pessoaService.getPessoaByEmail(this.pessoa.email).subscribe(
         data => {
           if(data == null){

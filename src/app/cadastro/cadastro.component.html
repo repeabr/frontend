@@ -14,12 +14,13 @@
             <button type="button" class="btn btn-dark" *ngIf="cientista" (click)="cadastroCientista()"
                 role="button">Cadastro de cientistas</button>
             <button type="button" class="btn btn-light" *ngIf="!cientista" (click)="cadastroCientista()"
-             role="button">Cadastro de cientistas</button>
+                role="button">Cadastro de cientistas</button>
         </div>
         <div class="col-md-6">
             <button type="button" class="btn btn-dark" *ngIf="comum" (click)="cadastroComum()" role="button">Cadastro
                 de usuário comum</button>
-            <button type="button" class="btn btn-light" *ngIf="!comum" (click)="cadastroComum()" role="button">Cadastro de
+            <button type="button" class="btn btn-light" *ngIf="!comum" (click)="cadastroComum()" role="button">Cadastro
+                de
                 usuário comum</button>
         </div>
     </div>
@@ -31,8 +32,8 @@
             <div class="row container">
                 <div class="col-md-6 mr-2">
                     <div class="form-group row">
-                        <input type="text" class="form-control" name="nomePessoa" [(ngModel)]="infos.nomePessoa" placeholder="Nome"
-                            required="true">
+                        <input type="text" class="form-control" name="nomePessoa" [(ngModel)]="infos.nomePessoa"
+                            placeholder="Nome" required="true">
                     </div>
 
                     <div class="form-group row">
@@ -101,7 +102,14 @@
                 </div>
             </div>
 
-            <button type="submit" (click)="onSubmitCientista()" class="btn btn-dark mr-2">Confirmar</button>
+            <div *ngIf="submiter">
+                <button type="submit" (click)="onSubmitCientista()" class="btn btn-dark mr-2"
+                    >Confirmar</button>
+            </div>
+            <div *ngIf="!submiter">
+                <button type="submit" (click)="onSubmitCientista()" class="btn btn-dark mr-2"
+                    disabled>Confirmar</button>
+            </div>
         </form>
     </div>
 
@@ -111,8 +119,8 @@
             <!--Cadatro de usuario comum-->
             <div class="container">
                 <div class="form-group row">
-                    <input type="text" class="form-control" name="nomePessoa" [(ngModel)]="infos.nomePessoa" placeholder="Nome"
-                        required="true">
+                    <input type="text" class="form-control" name="nomePessoa" [(ngModel)]="infos.nomePessoa"
+                        placeholder="Nome" required="true">
                 </div>
 
                 <div class="form-group row">
@@ -138,17 +146,25 @@
                 </div>
 
                 <div class="form-group row">
-                    <input type="text" class="form-control" name="nivelFormacao"
-                        [(ngModel)]="formacao.nivelDeFormacao" placeholder="Nível de Formacao" required="true">
+                    <input type="text" class="form-control" name="nivelFormacao" [(ngModel)]="formacao.nivelDeFormacao"
+                        placeholder="Nível de Formacao" required="true">
                 </div>
 
                 <div class="form-group row">
-                    <input type="text" class="form-control" name="localFormacao"
-                        [(ngModel)]="formacao.localDeFormacao" placeholder="Local de Formacao" required="true">
+                    <input type="text" class="form-control" name="localFormacao" [(ngModel)]="formacao.localDeFormacao"
+                        placeholder="Local de Formacao" required="true">
                 </div>
             </div>
 
-            <button *ngIf="!sucesso" type="submit" (click)="onSubmitComum()" class="btn btn-dark mr-2">Confirmar</button>
+
+            <div *ngIf="!submiter">
+                <button type="submit" (click)="onSubmitComum()" class="btn btn-dark mr-2"
+                    disabled>Confirmar</button>
+            </div>
+            <div *ngIf="submiter">
+                <button type="submit" (click)="onSubmitComum()" class="btn btn-dark mr-2"
+                    >Confirmar</button>
+            </div>
 
         </form>
     </div>

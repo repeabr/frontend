@@ -30,9 +30,9 @@
 
         <h6 class="mt-3">Interesses:</h6>
         <div *ngIf="temInteresses">
-            <div *ngFor="let i of interesses">
-                <div>{{i.nome}}</div>
-            </div>
+            <ul class="list-group" *ngFor="let x of interesses;">
+                <li class="list-group-item">{{x}}</li>
+            </ul>
         </div>
         <div *ngIf="!temInteresses">
             <span><b>Não há interesses cadastrados.</b></span><br>

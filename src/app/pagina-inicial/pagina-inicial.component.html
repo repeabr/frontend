@@ -8,18 +8,21 @@
 
         <h6>Informações do seu perfil:</h6>
         <div *ngIf="cientista">
-            <img src="https://image.flaticon.com/icons/svg/194/194937.svg" alt="Cientista" style="width: 200px; height: 200px;"><br>
+            <img src="https://image.flaticon.com/icons/svg/194/194937.svg" alt="Cientista"
+                style="width: 200px; height: 200px;"><br>
             <span><b>Email:</b> {{pessoa?.email}}</span><br>
             <span><b>Nivel de formação: </b>{{formacao?.nivelDeFormacao}}</span><br>
             <span><b>Local de formação: </b>{{formacao?.localDeFormacao}}</span><br>
             <span><b>Data de nascimento: </b>{{dataNascimento}}</span><br>
             <span><b>Tempo como cientista: </b>{{tempoEmAtividade}}</span><br>
             <span><b>Nome da instituição: </b>{{trabalho?.nomeInstituicao}}</span><br>
-            <span><b>Local da instituição: </b>{{trabalho?.cidadeOndeTrabalha}} - {{trabalho?.estadoOndeTrabalha}}</span><br>
+            <span><b>Local da instituição: </b>{{trabalho?.cidadeOndeTrabalha}} -
+                {{trabalho?.estadoOndeTrabalha}}</span><br>
             <span><b>Curriculo Lattes:</b> {{curriculo?.link}}</span><br>
         </div>
         <div *ngIf="!cientista">
-            <img src="https://image.flaticon.com/icons/svg/456/456141.svg" alt="Cientista" style="width: 200px; height: 200px;"><br>
+            <img src="https://image.flaticon.com/icons/svg/456/456141.svg" alt="Cientista"
+                style="width: 200px; height: 200px;"><br>
             <span><b>Nivel de formação:</b>{{formacao?.nivelDeFormacao}}</span><br>
             <span><b>Local de formação:</b>{{formacao?.localDeFormacao}}</span><br>
             <span><b>Data de nascimento: </b>{{dataNascimento}}</span><br>
@@ -27,9 +30,9 @@
 
         <h6 class="mt-3">Interesses:</h6>
         <div *ngIf="temInteresses">
-            <div *ngFor="let i of interesses">
-                <div>{{i.nome}}</div>
-            </div>
+            <ul class="list-group" *ngFor="let x of interesses;">
+                <li class="list-group-item">{{x}}</li>
+            </ul>
         </div>
         <div *ngIf="!temInteresses">
             <span><b>Você ainda não cadastrou interesses.</b></span><br>

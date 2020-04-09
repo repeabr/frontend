@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Pessoa, Curriculo, Formacao, InfoAdicionais, Interesse, Trabalho } from '../model/model';
+import { Pessoa, Curriculo, Formacao, InfoAdicionais, Trabalho } from '../model/model';
 import { PessoaService } from '../service/pessoa.service';
 
 @Component({
@@ -16,7 +16,6 @@ export class AtualizarComponent implements OnInit {
   curriculo: Curriculo = new Curriculo();
   formacao: Formacao = new Formacao();  
   infos: InfoAdicionais = new InfoAdicionais();
-  interesses: Interesse[] = [];
   trabalho: Trabalho = new Trabalho();
 
   constructor(private pessoaService: PessoaService) { }
@@ -35,7 +34,6 @@ export class AtualizarComponent implements OnInit {
         this.pessoa.curriculo = this.curriculo;
         this.pessoa.formacao = this.formacao;
         this.pessoa.infos = this.infos;
-        this.pessoa.interesses = this.interesses;
         this.pessoa.trabalho = this.trabalho;
         this.atualizado = true;   
     }
@@ -52,7 +50,6 @@ export class AtualizarComponent implements OnInit {
         this.curriculo = data.curriculo;
         this.formacao = data.formacao;
         this.infos = data.infos;
-        this.interesses = data.interesses;
         this.trabalho = data.trabalho;
 
         this.cientista = this.verificarPessoa();

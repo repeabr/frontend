@@ -10,7 +10,9 @@ import { Router } from '@angular/router';
 })
 export class ListaUsuariosComponent implements OnInit {
 
-  membros: Pessoa[];  
+  searchText;
+  membros: Pessoa[] = [];
+  temMembros: boolean;
 
   constructor(private pessoaService: PessoaService, private router: Router) { }
 
@@ -22,13 +24,22 @@ export class ListaUsuariosComponent implements OnInit {
     this.pessoaService.getListaPessoasExceto(localStorage.getItem("email")).subscribe(
       data => {
         this.membros = data;
+        this.temMembros = this.verificarMembros();
       }
     );
   }
 
   goToPerfil(email: string){
     localStorage.setItem("emailPerfil", email);
-    this.router.navigateByUrl("perfil")
+    this.router.navigateByUrl("perfil");
+  }
+
+  verificarMembros() {
+    if (this.membros.length > 0) {
+      return true;
+    } else {
+      return false;
+    }    
   }
 
 }

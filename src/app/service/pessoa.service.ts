@@ -8,11 +8,11 @@ import { Observable } from 'rxjs';
 })
 export class PessoaService {
 
-  cadastro = "https://server-r-backend.herokuapp.com/redesocial/pessoa/cadastro";
-  verificaLogin = "https://server-r-backend.herokuapp.com/redesocial/pessoa/emailpessoa/";
-  listaPessoas = "https://server-r-backend.herokuapp.com/redesocial/pessoa/listar";
-  listaPessoasExceto = "https://server-r-backend.herokuapp.com/redesocial/pessoa/listarExceto/";
-  atualizaPessoa = "https://server-r-backend.herokuapp.com/redesocial/pessoa/atualizar";
+  cadastro = "https://server-r.herokuapp.com/redesocial/pessoa/cadastro";
+  verificaLogin = "https://server-r.herokuapp.com/redesocial/pessoa/emailpessoa/";
+  listaPessoas = "https://server-r.herokuapp.com/redesocial/pessoa/listar";
+  listaPessoasExceto = "https://server-r.herokuapp.com/redesocial/pessoa/listarExceto/";
+  atualizaPessoa = "https://server-r.herokuapp.com/redesocial/pessoa/atualizar";
 
   constructor(private http: HttpClient) { }
 

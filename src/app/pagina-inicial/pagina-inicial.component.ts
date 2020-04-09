@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PessoaService } from '../service/pessoa.service';
-import { Pessoa, InfoAdicionais, Curriculo, Formacao, Interesse, Trabalho } from '../model/model';
+import { Pessoa, InfoAdicionais, Curriculo, Formacao, Trabalho } from '../model/model';
 
 @Component({
   selector: 'app-pagina-inicial',
@@ -14,9 +14,10 @@ export class PaginaInicialComponent implements OnInit {
   curriculo: Curriculo = new Curriculo();
   formacao: Formacao = new Formacao();
   infos: InfoAdicionais = new InfoAdicionais();
-  interesses: Interesse[] = [];
   trabalho: Trabalho = new Trabalho();
+
   temInteresses: boolean;
+  interesses = [];
   
   cientista: boolean;
   dataNascimento: string;
@@ -60,10 +61,11 @@ export class PaginaInicialComponent implements OnInit {
           this.tempoEmAtividade = final2.toString() + " ano(s)";
         }
 
-        if(data.interesses.length == 0){
+        if (data.interesses == "" || data.interesses == null) {
           this.temInteresses = false;
         } else {
           this.temInteresses = true;
+          this.interesses = this.pessoa.interesses.split(",");
         }
 
         this.cientista = this.verificarPessoa();

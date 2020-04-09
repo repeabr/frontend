@@ -4,6 +4,25 @@
 </ol>
 
 <div class="container">
+    <divclass="alert alert-info">
+        <table class="table table-borderless">
+            <thead>
+                <tr>
+                    <th scope="col">Interesses já cadastrados:</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody  *ngIf="!jaTemInteresse" >
+                <tr *ngFor="let i of selecionados">
+                    <td>{{i}}</td>
+                    <td>
+                        <button class="btn btn-dark" (click)="remover(i)">Remover</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>    
+
     <div class="form-group">
         <input type="text" class="form-control" placeholder="Pesquisar tópico de interesse..." [(ngModel)]="searchText">
     </div>
@@ -11,23 +30,20 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th scope="col">Interesses</th>
+                <th scope="col">Tópicos</th>
                 <th scope="col"></th>
             </tr>
         </thead>
-        <tbody *ngFor="let i of interesses | filter: searchText | paginate: { itemsPerPage: 10, currentPage: p }">
+        <tbody *ngFor="let i of glossarios | filter: searchText | paginate: { itemsPerPage: 10, currentPage: p }">
             <tr>
-                <td>{{i.nome}}</td>
-                <td *ngIf="!jaTemInteresse">
-                    <button  class="btn btn-info" (click)="botao(i.status, i)">Adicionar</button>
-                </td>
-                <td *ngIf="jaTemInteresse">
-                    <button  class="btn btn-danger" (click)="botao(i.status, i)">Remover</button>
+                <td>{{i}}</td>
+                <td>
+                    <button class="btn btn-dark" (click)="adicionar(i)">Adicionar</button>
                 </td>
             </tr>
         </tbody>
     </table>
-    
+
     <pagination-controls autoHide="true" responsive="true" previousLabel="Anterior" nextLabel="Próximo"
         (pageChange)="p = $event"></pagination-controls>
 </div>

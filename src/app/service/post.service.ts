@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class PostService {
 
-  criarPost = "http://server-r.herokuapp.com/redesocial/post/criar";
-  listaPostPorEmail = "http://server-r.herokuapp.com/redesocial/post/listarPorEmail/";
+  criarPost = "https://server-r.herokuapp.com/redesocial/post/criar";
+  listaPostPorEmail = "https://server-r.herokuapp.com/redesocial/post/listarPorEmail/";
 
   constructor(private http: HttpClient) { }
 

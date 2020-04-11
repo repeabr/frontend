@@ -42,10 +42,12 @@ export class Trabalho{
 export class Post{
     id: number;
     publicacao: Publicacao;
+    emailAutor: string;
 }
 
 export class Publicacao{
     titulo: string;
+    conteudo: string;
     localDaPublicacao: string;
     anoDaPublicacao: string;
     url: string;

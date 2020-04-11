@@ -1,0 +1,55 @@
+<form (ngSubmit)="onSubmit()" ngNativeValidate>
+    <div class="container">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Titulo" name="titulo"
+            [(ngModel)]="publicacao.titulo" required="true">
+        </div>
+
+        <div class="form-group">
+            <textarea type="text" placeholder="Conteúdo" class="form-control" name="conteudo"
+            [(ngModel)]="publicacao.conteudo" required="true"></textarea>
+        </div>
+
+        <div class="form-group">
+            <input placeholder="Local da publicação" type="text" class="form-control" name="localDaPublicacao"
+            [(ngModel)]="publicacao.localDaPublicacao" required="true">
+        </div>
+
+        <div class="form-group">
+            <input placeholder="Ano da publicacao" class="form-control" type="text" name="anoDaPublicacao"
+            id="anoDaPublicacao" [(ngModel)]="publicacao.anoDaPublicacao" required="true">
+        </div>
+        
+        <div class="form-group">
+            <input type="url" class="form-control" [(ngModel)]="publicacao.url" name="url"
+            placeholder="Url de referência">
+        </div>
+
+        <div class="form-group">
+            <input type="text" class="form-control" [(ngModel)]="publicacao.tags" name="tags"
+            placeholder="Tags">
+        </div>     
+
+        <button class="btn btn-primary" type="submit">Postar</button>
+    </div>    
+</form>
+
+<div class="container" *ngIf="temPost">    
+    <br>
+    <div *ngFor="let p of listaPosts">
+        <div class="card text-center">
+            <div class="card-header">
+                <b>
+                {{p.publicacao.titulo}}
+                </b>
+            </div>
+            <div class="card-body">
+              <p class="card-text">{{p.publicacao.conteudo}}</p>
+            </div>
+            <div class="card-footer text-muted">
+              {{p.publicacao.localDaPublicacao}} - {{p.publicacao.anoDaPublicacao}}
+            </div>
+        </div>
+        <br>
+    </div>
+</div>

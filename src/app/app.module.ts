@@ -16,6 +16,7 @@ import { AtualizarComponent } from './atualizar/atualizar.component';
 import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { InteresseComponent } from './interesse/interesse.component';
+import { PostComponent } from './post/post.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { InteresseComponent } from './interesse/interesse.component';
     AtualizarComponent,
     ListaUsuariosComponent,
     PerfilComponent,
-    InteresseComponent
+    InteresseComponent,
+    PostComponent
   ],
   imports: [
     HttpClientModule,

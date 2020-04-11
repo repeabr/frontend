@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Pessoa, Curriculo, Formacao, InfoAdicionais, Trabalho } from '../model/model';
 import { PessoaService } from '../service/pessoa.service';
+import { PostService } from '../service/post.service';
 
 @Component({
   selector: 'app-perfil',
@@ -23,10 +24,21 @@ export class PerfilComponent implements OnInit {
   dataNascimento: string;
   tempoEmAtividade: string;
 
-  constructor(private pessoaService: PessoaService) { }
+  listaPosts = [];
+  temPost: boolean;
+
+  constructor(private pessoaService: PessoaService, private postService: PostService) {
+    this.postService.getPosts(localStorage.getItem("emailPerfil")).subscribe(
+      data => {
+        this.listaPosts = data;
+        console.log(this.listaPosts.length); 
+        this.temPost = this.verificarPost();  
+      }
+    );
+  }
 
   ngOnInit() {
-    this.getPessoa();
+    this.getPessoa();  
   }
 
   getPessoa() {
@@ -68,10 +80,17 @@ export class PerfilComponent implements OnInit {
           this.interesses = this.pessoa.interesses.split(",");
         }
 
-        this.cientista = this.verificarPessoa();
-        console.log(this.cientista);
+        this.cientista = this.verificarPessoa();           
       }
     );    
+  }
+
+  verificarPost(){
+    if(this.listaPosts.length == 0){
+      return false;
+    } else {
+      return true;
+    }
   }
 
   verificarPessoa() {

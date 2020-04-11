@@ -65,7 +65,6 @@ export class InteresseComponent implements OnInit {
         }
       }
     )
-    console.log(this.jaTemInteresse);
   }
 
   adicionar(i: any) {
@@ -79,7 +78,6 @@ export class InteresseComponent implements OnInit {
     this.glossarios.splice(this.glossarios.indexOf(i),1);
 
     this.jaTemInteresse = false;
-    console.log(this.jaTemInteresse);
   }
 
   remover(i: any) {

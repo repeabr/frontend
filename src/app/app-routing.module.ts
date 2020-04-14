@@ -16,10 +16,10 @@ const routes: Routes = [
   {path:"login", component:LoginComponent},  
   {path:"cadastro", component: CadastroComponent},
 
-  {path:"lista", component:ListaUsuariosComponent},  
-  {path:"atualizar", component: AtualizarComponent},
-  {path:"perfil", component: PerfilComponent},
-  {path:"interesses", component: InteresseComponent},
+  {path:"lista", component:ListaUsuariosComponent, canActivate: [AuthGuard]},  
+  {path:"atualizar", component: AtualizarComponent, canActivate: [AuthGuard]},
+  {path:"perfil", component: PerfilComponent, canActivate: [AuthGuard]},
+  {path:"interesses", component: InteresseComponent, canActivate: [AuthGuard]},
 
   {path: '**', redirectTo: ''}
 ];

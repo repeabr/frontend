@@ -10,7 +10,6 @@
         </h5>
         
         <div *ngIf="cientista">
-            <img src="https://image.flaticon.com/icons/svg/194/194937.svg" alt="Cientista" style="width: 200px; height: 200px;"><br>
             <span><b>Email: </b>{{pessoa?.email}}</span><br>
             <span><b>Nivel de formação:</b>{{formacao?.nivelDeFormacao}}</span><br>
             <span><b>Local de formação:</b>{{formacao?.localDeFormacao}}</span><br>
@@ -21,7 +20,6 @@
             <span><b>Curriculo Lattes: </b>{{curriculo?.link}}</span><br>
         </div>
         <div *ngIf="!cientista">
-            <img src="https://image.flaticon.com/icons/svg/456/456141.svg" alt="Cientista" style="width: 200px; height: 200px;"><br>
             <span><b>Email:</b> {{pessoa?.email}}</span><br>
             <span><b>Nivel de formação: </b>{{formacao?.nivelDeFormacao}}</span><br>
             <span><b>Local de formação: </b>{{formacao?.localDeFormacao}}</span><br>

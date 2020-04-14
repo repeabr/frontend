@@ -39,7 +39,6 @@ export class CadastroComponent implements OnInit {
   }
 
   onSubmitCientista(){    
-    this.submiter = false;   
     if(this.infos.nomePessoa != null &&
       this.pessoa.email != null &&
       this.pessoa.senha != null &&
@@ -55,6 +54,7 @@ export class CadastroComponent implements OnInit {
         this.pessoa.formacao = this.formacao;
         this.pessoa.infos = this.infos;
         this.pessoa.trabalho = this.trabalho;
+        this.submiter = false;   
     }
     if(!this.submiter){
       this.pessoaService.getPessoaByEmail(this.pessoa.email).subscribe(
@@ -76,8 +76,7 @@ export class CadastroComponent implements OnInit {
     }
   }
 
-  onSubmitComum(){
-    this.submiter = false;   
+  onSubmitComum(){  
     if(this.infos.nomePessoa != null &&
       this.pessoa.email != null &&
       this.pessoa.senha != null &&
@@ -85,7 +84,14 @@ export class CadastroComponent implements OnInit {
       this.formacao.nivelDeFormacao != null &&
       this.formacao.localDeFormacao != null) {        
         this.pessoa.formacao = this.formacao;
+
+        this.infos.dataInicioCientista = "";
         this.pessoa.infos = this.infos;
+
+        this.curriculo = null;
+        this.trabalho = null;
+
+        this.submiter = false; 
     }
     if(!this.submiter){
       this.pessoaService.getPessoaByEmail(this.pessoa.email).subscribe(

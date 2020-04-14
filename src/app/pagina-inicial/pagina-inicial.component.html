@@ -6,25 +6,19 @@
     <div class="col-md-6">
         <h5 class="mb-3">Olá, {{infos?.nomePessoa}}</h5>
 
-        <h6>Informações do seu perfil:</h6>
         <div *ngIf="cientista">
-            <img src="https://image.flaticon.com/icons/svg/194/194937.svg" alt="Cientista"
-                style="width: 200px; height: 200px;"><br>
-            <span><b>Email:</b> {{pessoa?.email}}</span><br>
-            <span><b>Nivel de formação: </b>{{formacao?.nivelDeFormacao}}</span><br>
-            <span><b>Local de formação: </b>{{formacao?.localDeFormacao}}</span><br>
-            <span><b>Data de nascimento: </b>{{dataNascimento}}</span><br>
-            <span><b>Tempo como cientista: </b>{{tempoEmAtividade}}</span><br>
-            <span><b>Nome da instituição: </b>{{trabalho?.nomeInstituicao}}</span><br>
-            <span><b>Local da instituição: </b>{{trabalho?.cidadeOndeTrabalha}} -
+            <span>{{pessoa?.email}}</span><br>
+            <span>{{formacao?.nivelDeFormacao}}</span><br>
+            <span>{{formacao?.localDeFormacao}}</span><br>
+            <span>{{dataNascimento}}</span><br>
+            <span>{{tempoEmAtividade}}</span> como cientista<br>
+            <span>{{trabalho?.nomeInstituicao}} - {{trabalho?.cidadeOndeTrabalha}} -
                 {{trabalho?.estadoOndeTrabalha}}</span><br>
-            <span><b>Curriculo Lattes:</b> {{curriculo?.link}}</span><br>
+            <span>{{curriculo?.link}}</span><br>
         </div>
         <div *ngIf="!cientista">
-            <img src="https://image.flaticon.com/icons/svg/456/456141.svg" alt="Cientista"
-                style="width: 200px; height: 200px;"><br>
-            <span><b>Nivel de formação:</b>{{formacao?.nivelDeFormacao}}</span><br>
-            <span><b>Local de formação:</b>{{formacao?.localDeFormacao}}</span><br>
+            <span>{{formacao?.nivelDeFormacao}}</span><br>
+            <span>{{formacao?.localDeFormacao}}</span><br>
             <span><b>Data de nascimento: </b>{{dataNascimento}}</span><br>
         </div>
 

@@ -43,6 +43,7 @@ export class Post{
     id: number;
     publicacao: Publicacao;
     emailAutor: string;
+    curtidas: number;
 }
 
 export class Publicacao{
@@ -52,4 +53,11 @@ export class Publicacao{
     anoDaPublicacao: string;
     url: string;
     tags: string;
+}
+
+//------------------------------------------------
+export class Curtida {
+    id: number;
+    idPostCurtido: number;
+    idUsuarioCurtiu: number;
 }

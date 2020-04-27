@@ -17,6 +17,7 @@ import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.componen
 import { PerfilComponent } from './perfil/perfil.component';
 import { InteresseComponent } from './interesse/interesse.component';
 import { PostComponent } from './post/post.component';
+import { CadastroInteresseComponent } from './cadastro-interesse/cadastro-interesse.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { PostComponent } from './post/post.component';
     ListaUsuariosComponent,
     PerfilComponent,
     InteresseComponent,
-    PostComponent
+    PostComponent,
+    CadastroInteresseComponent
   ],
   imports: [
     HttpClientModule,

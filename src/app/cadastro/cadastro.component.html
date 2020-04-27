@@ -1,5 +1,6 @@
 <ol class="breadcrumb">
-    <li class="breadcrumb-item active">Cadastro</li>
+    <li class="breadcrumb-item">Cadastro</li>
+    <li class="breadcrumb-item active">Informações iniciais</li>
 </ol>
 
 <div class="container">
@@ -7,9 +8,9 @@
         Email já existe.
     </div>
     <div *ngIf="sucesso" class="alert alert-success m-3">
-        Perfil cadastrado com sucesso. <a routerLink="/login">Clique aqui</a> para acessar o nosso site.
+        Perfil cadastrado com sucesso. <a routerLink="/cadastro-interesses">Clique aqui</a> para inserir interesses.
     </div>
-    <div class="navbar">
+    <div class="navbar" *ngIf="!sucesso">
         <div class="col-md-6">
             <button type="button" class="btn btn-dark" *ngIf="cientista" (click)="cadastroCientista()"
                 role="button">Cadastro de cientistas</button>
@@ -23,7 +24,6 @@
                 de usuário comum</button>
         </div>
     </div>
-
     <div *ngIf="!sucesso">
         <form *ngIf="cientista" ngNativeValidate class="mt-2">
 
@@ -164,8 +164,6 @@
                 <button type="submit" (click)="onSubmitComum()" class="btn btn-dark mr-2"
                     >Confirmar</button>
             </div>
-
         </form>
     </div>
-
 </div>

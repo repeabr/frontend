@@ -8,6 +8,7 @@ import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.componen
 import { AtualizarComponent } from './atualizar/atualizar.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { InteresseComponent } from './interesse/interesse.component';
+import { CadastroInteresseComponent } from './cadastro-interesse/cadastro-interesse.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
 
   {path:"login", component:LoginComponent},  
   {path:"cadastro", component: CadastroComponent},
+  {path:"cadastro-interesses", component: CadastroInteresseComponent},
 
   {path:"lista", component:ListaUsuariosComponent, canActivate: [AuthGuard]},  
   {path:"atualizar", component: AtualizarComponent, canActivate: [AuthGuard]},

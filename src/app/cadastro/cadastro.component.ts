@@ -55,6 +55,12 @@ export class CadastroComponent implements OnInit {
         this.pessoa.infos = this.infos;
         this.pessoa.trabalho = this.trabalho;
         this.submiter = false;   
+        
+        console.log(this.pessoa.email);
+
+        localStorage.setItem("emailCadastrado", this.pessoa.email);
+        console.log(localStorage.getItem("emailCadastrado"));
+
     }
     if(!this.submiter){
       this.pessoaService.getPessoaByEmail(this.pessoa.email).subscribe(
@@ -84,6 +90,9 @@ export class CadastroComponent implements OnInit {
       this.formacao.nivelDeFormacao != null &&
       this.formacao.localDeFormacao != null) {        
         this.pessoa.formacao = this.formacao;
+        console.log(this.pessoa.email);
+        localStorage.setItem("emailCadastrado", this.pessoa.email);
+        console.log(localStorage.getItem("emailCadastrado"));
 
         this.infos.dataInicioCientista = "";
         this.pessoa.infos = this.infos;

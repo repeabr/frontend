@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Pessoa, Curriculo, Formacao, InfoAdicionais, Trabalho } from '../model/model';
+import { Pessoa, Curriculo, Formacao, InfoAdicionais, Trabalho, Curtida, Post } from '../model/model';
 import { PessoaService } from '../service/pessoa.service';
 import { PostService } from '../service/post.service';
+import { CurtidaService } from '../service/curtida.service';
 
 @Component({
   selector: 'app-perfil',
@@ -27,18 +28,62 @@ export class PerfilComponent implements OnInit {
   listaPosts = [];
   temPost: boolean;
 
-  constructor(private pessoaService: PessoaService, private postService: PostService) {
+  curtida: Curtida = new Curtida();
+  mensagem = "Processando...";
+
+  constructor(private pessoaService: PessoaService, private postService: PostService
+    ,private curtidaService: CurtidaService) {
     this.postService.getPosts(localStorage.getItem("emailPerfil")).subscribe(
       data => {
         this.listaPosts = data;
-        console.log(this.listaPosts.length); 
         this.temPost = this.verificarPost();  
       }
     );
   }
 
   ngOnInit() {
-    this.getPessoa();  
+    this.getPessoa(); 
+    this.postService.getPosts(localStorage.getItem("emailPerfil")).subscribe(
+      data => {
+        this.listaPosts = data; 
+        this.temPost = this.verificarPost();  
+      }
+    );
+  }
+
+  curtir(post: Post){
+    this.verificarCurtida(post.id);
+  }
+
+  verificarCurtida(idPost: number){
+    this.pessoaService.getPessoaByEmail(localStorage.getItem("email"))
+    .subscribe(
+      data => {
+        this.curtida.idUsuarioCurtiu = data.id;
+        this.curtidaService.verificarCurtida(data.id, idPost)
+        .subscribe(
+          x => {
+            if(!x){
+              this.curtida.idPostCurtido = idPost;       
+              this.curtidaService.createCurtida(this.curtida).subscribe();
+              this.postService.getPostById(idPost).subscribe(
+                y => {
+                  y.curtidas++;
+                  this.postService.atualizarPost(y).subscribe(
+                    z => {
+                      this.ngOnInit();
+                    }
+                  );
+                }
+              )
+              this.mensagem = "Curtida contabilizada. :D";
+            } else {
+              this.mensagem = "Você já curtiu esse post";
+            }
+          }          
+        )
+      }      
+    )
   }
 
   getPessoa() {

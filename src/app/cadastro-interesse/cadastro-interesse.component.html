@@ -1,0 +1,51 @@
+<ol class="breadcrumb">
+    <li class="breadcrumb-item">Cadastro</li>
+    <li class="breadcrumb-item active">Interesse</li>
+</ol>
+
+<div class="container">
+    <div *ngIf="!jaTemInteresse"  class="alert alert-info">
+        <table class="table table-borderless">
+            <thead>
+                <tr>
+                    <th scope="col">Interesses já cadastrados:</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let i of selecionados">
+                    <td *ngIf="!jaTemInteresse">{{i}}</td>
+                    <td *ngIf="!jaTemInteresse">
+                        <button class="btn btn-dark" (click)="remover(i)">Remover</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="form-group">
+        <input type="text" class="form-control" placeholder="Pesquisar tópico de interesse..." [(ngModel)]="searchText">
+    </div>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Tópicos</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let i of glossarios | filter: searchText | paginate: { itemsPerPage: 10, currentPage: p }">
+            <tr>
+                <td>{{i}}</td>
+                <td>
+                    <button class="btn btn-dark" (click)="adicionar(i)">Adicionar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <pagination-controls autoHide="true" responsive="true" previousLabel="Anterior" nextLabel="Próximo"
+        (pageChange)="p = $event"></pagination-controls>
+
+    <button class="btn btn-dark" (click)="finalizar()">Finalizar Cadastro</button>
+</div>

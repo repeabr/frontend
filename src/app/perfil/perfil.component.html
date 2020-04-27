@@ -53,6 +53,13 @@
                     <div class="card-footer text-muted">
                       {{p.publicacao.localDaPublicacao}} - {{p.publicacao.anoDaPublicacao}}
                     </div>
+                    <div class="card-footer">
+                        <button class="btn btn-block btn-success"
+                        (click)="curtir(p)"
+                        data-toggle="modal" data-target="#myModal">
+                            {{p.curtidas}} Like
+                        </button>   
+                    </div>
                 </div>
                 <br>
             </div>
@@ -60,5 +67,21 @@
         <div *ngIf="!temPost">
             <h5>Não há posts desse usuário</h5>
         </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>{{mensagem}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
     </div>
 </div>

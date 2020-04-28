@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PessoaService } from '../service/pessoa.service';
 import { Pessoa, Curriculo, Formacao, InfoAdicionais, Trabalho } from '../model/model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro',
@@ -22,7 +23,7 @@ export class CadastroComponent implements OnInit {
   cientista = true;
   comum = false;
 
-  constructor(private pessoaService: PessoaService) { }
+  constructor(private pessoaService: PessoaService, private router: Router) { }
 
   ngOnInit() {
     console.log(this.submiter);
@@ -60,7 +61,6 @@ export class CadastroComponent implements OnInit {
 
         localStorage.setItem("emailCadastrado", this.pessoa.email);
         console.log(localStorage.getItem("emailCadastrado"));
-
     }
     if(!this.submiter){
       this.pessoaService.getPessoaByEmail(this.pessoa.email).subscribe(
@@ -73,6 +73,7 @@ export class CadastroComponent implements OnInit {
             );
             this.erro = false;
             this.sucesso = true;
+            this.router.navigateByUrl("/cadastro-interesses");
           } else {
             this.erro = true;
             this.sucesso = false;
@@ -113,6 +114,7 @@ export class CadastroComponent implements OnInit {
             );
             this.erro = false;
             this.sucesso = true;
+            this.router.navigateByUrl("/cadastro-interesses");
           } else {
             this.erro = true;
             this.sucesso = false;

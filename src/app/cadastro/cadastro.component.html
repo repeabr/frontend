@@ -7,9 +7,6 @@
     <div *ngIf="erro" class="alert alert-danger m-3">
         Email já existe.
     </div>
-    <div *ngIf="sucesso" class="alert alert-success m-3">
-        Perfil cadastrado com sucesso. <a routerLink="/cadastro-interesses">Clique aqui</a> para inserir interesses.
-    </div>
     <div class="navbar" *ngIf="!sucesso">
         <div class="col-md-6">
             <button type="button" class="btn btn-dark" *ngIf="cientista" (click)="cadastroCientista()"
@@ -103,11 +100,11 @@
 
             <div *ngIf="submiter">
                 <button type="submit" (click)="onSubmitCientista()" class="btn btn-dark mr-2"
-                    >Confirmar</button>
+                    >Prosseguir com a inserção dos interesses</button>
             </div>
             <div *ngIf="!submiter">
                 <button type="submit" (click)="onSubmitCientista()" class="btn btn-dark mr-2"
-                    disabled>Confirmar</button>
+                    disabled>Prosseguir com a inserção dos interesses</button>
             </div>
         </form>
     </div>
@@ -158,11 +155,11 @@
 
             <div *ngIf="!submiter">
                 <button type="submit" (click)="onSubmitComum()" class="btn btn-dark mr-2"
-                    disabled>Confirmar</button>
+                    disabled>Prosseguir com a inserção dos interesses</button>
             </div>
             <div *ngIf="submiter">
                 <button type="submit" (click)="onSubmitComum()" class="btn btn-dark mr-2"
-                    >Confirmar</button>
+                    >Prosseguir com a inserção dos interesses</button>
             </div>
         </form>
     </div>

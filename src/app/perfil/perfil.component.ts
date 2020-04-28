@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Pessoa, Curriculo, Formacao, InfoAdicionais, Trabalho, Curtida, Post } from '../model/model';
+import { Pessoa, Curriculo, Formacao, InfoAdicionais, Trabalho, Curtida, Post, PostPessoa } from '../model/model';
 import { PessoaService } from '../service/pessoa.service';
 import { PostService } from '../service/post.service';
 import { CurtidaService } from '../service/curtida.service';
@@ -28,62 +28,78 @@ export class PerfilComponent implements OnInit {
   listaPosts = [];
   temPost: boolean;
 
-  curtida: Curtida = new Curtida();
-  mensagem = "Processando...";
+  curtida: Curtida = new Curtida()
+
+  status = ["Like", "Dislike"];
+  listaPostPessoa = [];
+  auxPost = new Post();
 
   constructor(private pessoaService: PessoaService, private postService: PostService
-    ,private curtidaService: CurtidaService) {
-    this.postService.getPosts(localStorage.getItem("emailPerfil")).subscribe(
-      data => {
-        this.listaPosts = data;
-        this.temPost = this.verificarPost();  
-      }
-    );
+    ,private curtidaService: CurtidaService) {    
   }
 
   ngOnInit() {
     this.getPessoa(); 
+    this.curtir();
+  }
+
+  botaoDeCurtir(post: PostPessoa){
+    if (post.status === this.status[0]) {
+      this.postService.getPostById(post.idDoPost).subscribe(
+        data => {
+          this.auxPost = data;
+          this.auxPost.curtidas++;
+          this.curtida.idPostCurtido = post.idDoPost;
+          this.curtida.idUsuarioCurtiu = +(localStorage.getItem("idUsuario"));
+          this.postService.atualizarPost(this.auxPost).subscribe();
+          this.curtidaService.createCurtida(this.curtida).subscribe();  
+          this.ngOnInit();   
+        }
+      )
+    } else if (post.status === this.status[1]) {
+      this.postService.getPostById(post.idDoPost).subscribe(
+        data => {
+          this.auxPost = data;
+          this.auxPost.curtidas--;
+          this.curtida.idPostCurtido = post.idDoPost;
+          this.curtida.idUsuarioCurtiu = +(localStorage.getItem("idUsuario"));
+          this.postService.atualizarPost(this.auxPost).subscribe();
+          this.curtidaService.deleteCurtida(+(localStorage.getItem("idUsuario")),this.auxPost.id).subscribe();
+          this.ngOnInit(); 
+        }
+      )
+    }
+  }
+
+  curtir(){
     this.postService.getPosts(localStorage.getItem("emailPerfil")).subscribe(
-      data => {
-        this.listaPosts = data; 
-        this.temPost = this.verificarPost();  
-      }
-    );
-  }
-
-  curtir(post: Post){
-    this.verificarCurtida(post.id);
-  }
-
-  verificarCurtida(idPost: number){
-    this.pessoaService.getPessoaByEmail(localStorage.getItem("email"))
-    .subscribe(
-      data => {
-        this.curtida.idUsuarioCurtiu = data.id;
-        this.curtidaService.verificarCurtida(data.id, idPost)
-        .subscribe(
-          x => {
-            if(!x){
-              this.curtida.idPostCurtido = idPost;       
-              this.curtidaService.createCurtida(this.curtida).subscribe();
-              this.postService.getPostById(idPost).subscribe(
-                y => {
-                  y.curtidas++;
-                  this.postService.atualizarPost(y).subscribe(
-                    z => {
-                      this.ngOnInit();
-                    }
-                  );
-                }
-              )
-              this.mensagem = "Curtida contabilizada. :D";
-            } else {
-              this.mensagem = "Você já curtiu esse post";
+      data => {  
+        if (this.listaPostPessoa.length > 0) {
+          this.listaPostPessoa.splice(0, data.length);
+        }      
+        
+        for (var i = 0; i < data.length; i++) {
+          let postPessoa = new PostPessoa();
+          postPessoa.idDoPost = data[i].id;
+          postPessoa.publicacao = data[i].publicacao;
+          postPessoa.emailAutor = data[i].emailAutor;
+          postPessoa.curtidas = data[i].curtidas;
+          this.curtidaService.verificarCurtida(+(localStorage.getItem("idUsuario")),  postPessoa.idDoPost)
+          .subscribe(
+            x => {
+              if(!x) {
+                postPessoa.status = this.status[0];
+              } else {
+                postPessoa.status = this.status[1];
+              }
             }
-          }          
-        )
-      }      
-    )
+          );          
+          this.listaPostPessoa.push(postPessoa);
+        }
+        console.log(this.listaPostPessoa);
+        this.temPost = this.verificarPost(); 
+      }            
+    );
   }
 
   getPessoa() {
@@ -131,7 +147,7 @@ export class PerfilComponent implements OnInit {
   }
 
   verificarPost(){
-    if(this.listaPosts.length == 0){
+    if(this.listaPostPessoa.length == 0){
       return false;
     } else {
       return true;

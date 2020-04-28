@@ -61,3 +61,12 @@ export class Curtida {
     idPostCurtido: number;
     idUsuarioCurtiu: number;
 }
+
+//---------------------------------------------------
+export class PostPessoa {
+    idDoPost: number;
+    publicacao: Publicacao;
+    emailAutor: string;
+    curtidas: number;
+    status: string;   
+}

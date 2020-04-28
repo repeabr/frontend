@@ -25,9 +25,9 @@ export class CurtidaService {
     return this.http.get<any>(url + id);
   }
 
-  deleteCurtida(post: Post): Observable<any>{
+  deleteCurtida(idUsuario: number, idPost: number): Observable<any>{
     const url = "https://server-r.herokuapp.com/curtida/removeCurtida/";
-    return this.http.delete<any>(url + post.id);
+    return this.http.delete<any>(url + idUsuario + "/" + idPost);
   }
 
   verificarCurtida(idUsuario: number, idPost: number): Observable<any>{

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../auth/authentication.service';
+import { PessoaService } from '../service/pessoa.service';
 
 @Component({
   selector: 'app-menu',
@@ -8,7 +9,9 @@ import { AuthenticationService } from '../auth/authentication.service';
 })
 export class MenuComponent implements OnInit {
 
-  constructor(public authService: AuthenticationService) { }
+  cientista: any;
+
+  constructor(public authService: AuthenticationService, private pessoaService: PessoaService) { }
 
   ngOnInit() {
   }
@@ -16,4 +19,6 @@ export class MenuComponent implements OnInit {
   logout(){
     localStorage.clear();
   }
+
+  
 }

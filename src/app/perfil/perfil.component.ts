@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Pessoa, Curriculo, Formacao, InfoAdicionais, Trabalho, Curtida, Post, PostPessoa } from '../model/model';
+import { Pessoa, Curriculo, Formacao, InfoAdicionais, Trabalho, Post } from '../model/model';
 import { PessoaService } from '../service/pessoa.service';
 import { PostService } from '../service/post.service';
-import { CurtidaService } from '../service/curtida.service';
+import { ArtigoService } from '../service/artigo.service';
+import { AuthenticationService } from '../auth/authentication.service';
 
 @Component({
   selector: 'app-perfil',
@@ -20,86 +21,40 @@ export class PerfilComponent implements OnInit {
 
   temInteresses: boolean;
   interesses = [];
+  artigos = [];
+  posts = [];
   
   cientista: boolean;
   dataNascimento: string;
   tempoEmAtividade: string;
 
-  listaPosts = [];
-  temPost: boolean;
+  seguir = false;
+  seguindo = [];
+  seguidores = [];
 
-  curtida: Curtida = new Curtida()
+  temPost = false;
+  temArtigo = false;
 
-  status = ["Like", "Dislike"];
-  listaPostPessoa = [];
-  auxPost = new Post();
+  verifica: any;
 
-  constructor(private pessoaService: PessoaService, private postService: PostService
-    ,private curtidaService: CurtidaService) {    
+  constructor(private pessoaService: PessoaService, private artigoService: ArtigoService,
+    private postService: PostService) {    
   }
 
   ngOnInit() {
-    this.getPessoa(); 
-    this.curtir();
+    this.getPessoa();
   }
 
-  botaoDeCurtir(post: PostPessoa){
-    if (post.status === this.status[0]) {
-      this.postService.getPostById(post.idDoPost).subscribe(
-        data => {
-          this.auxPost = data;
-          this.auxPost.curtidas++;
-          this.curtida.idPostCurtido = post.idDoPost;
-          this.curtida.idUsuarioCurtiu = +(localStorage.getItem("idUsuario"));
-          this.postService.atualizarPost(this.auxPost).subscribe();
-          this.curtidaService.createCurtida(this.curtida).subscribe();  
-          this.ngOnInit();   
+  isCientista(){
+    this.pessoaService.getPessoaByEmail(localStorage.getItem("emailPerfil")).subscribe(
+      data => {
+        if (data.curriculo == null) {
+          this.verifica = false;
+        } else {
+          this.verifica = true;
         }
-      )
-    } else if (post.status === this.status[1]) {
-      this.postService.getPostById(post.idDoPost).subscribe(
-        data => {
-          this.auxPost = data;
-          this.auxPost.curtidas--;
-          this.curtida.idPostCurtido = post.idDoPost;
-          this.curtida.idUsuarioCurtiu = +(localStorage.getItem("idUsuario"));
-          this.postService.atualizarPost(this.auxPost).subscribe();
-          this.curtidaService.deleteCurtida(+(localStorage.getItem("idUsuario")),this.auxPost.id).subscribe();
-          this.ngOnInit(); 
-        }
-      )
-    }
-  }
-
-  curtir(){
-    this.postService.getPosts(localStorage.getItem("emailPerfil")).subscribe(
-      data => {  
-        if (this.listaPostPessoa.length > 0) {
-          this.listaPostPessoa.splice(0, data.length);
-        }      
-        
-        for (var i = 0; i < data.length; i++) {
-          let postPessoa = new PostPessoa();
-          postPessoa.idDoPost = data[i].id;
-          postPessoa.publicacao = data[i].publicacao;
-          postPessoa.emailAutor = data[i].emailAutor;
-          postPessoa.curtidas = data[i].curtidas;
-          this.curtidaService.verificarCurtida(+(localStorage.getItem("idUsuario")),  postPessoa.idDoPost)
-          .subscribe(
-            x => {
-              if(!x) {
-                postPessoa.status = this.status[0];
-              } else {
-                postPessoa.status = this.status[1];
-              }
-            }
-          );          
-          this.listaPostPessoa.push(postPessoa);
-        }
-        console.log(this.listaPostPessoa);
-        this.temPost = this.verificarPost(); 
-      }            
-    );
+      }
+    )
   }
 
   getPessoa() {
@@ -141,17 +96,60 @@ export class PerfilComponent implements OnInit {
           this.interesses = this.pessoa.interesses.split(",");
         }
 
+        this.getSeguidores(data.id);
+        this.getSeguindo(data.id)
+        this.verificarFollow(data.id); 
+        this.getArtigos();
+        this.getPosts();
+
         this.cientista = this.verificarPessoa();           
       }
     );    
   }
 
-  verificarPost(){
-    if(this.listaPostPessoa.length == 0){
-      return false;
-    } else {
-      return true;
-    }
+  getPosts(){
+    this.postService.getPosts(localStorage.getItem("emailPerfil")).subscribe(
+      data => {
+        this.posts = data;
+        if (this.posts.length == 0) {
+          this.temPost = false;
+        } else {
+          this.temPost = true;
+        }
+      }
+    )
+  }
+
+  getArtigos(){
+    this.artigoService.buscaArtigoPorEmail(localStorage.getItem("emailPerfil"))
+    .subscribe(
+      data => {
+        this.artigos = data;
+        if (this.artigos.length == 0) {
+          this.temArtigo = false;
+        } else {
+          this.temArtigo = true;
+        }
+      }
+    )
+  }
+
+  getSeguindo(a: any){
+    this.pessoaService.getSeguindo(a).subscribe( 
+      data => {
+        this.seguindo = data;
+        console.log(data);
+      }      
+    )
+  }
+
+  getSeguidores(a: any){
+    this.pessoaService.getSeguidores(a).subscribe( 
+      data => {
+        this.seguidores = data;  
+        console.log(data);
+      }      
+    )
   }
 
   verificarPessoa() {
@@ -160,6 +158,42 @@ export class PerfilComponent implements OnInit {
     } else {
       return false;
     }    
+  }
+  
+  undoFollow(idSeguindo: number){
+    this.pessoaService.getPessoaByEmail(localStorage.getItem("email")).subscribe(
+      data => {
+        this.pessoaService.undoFollow(idSeguindo, data).subscribe(
+          data => {
+            this.seguir = false;
+            this.ngOnInit();
+          }
+        );
+      }
+    ); 
+  }
+
+  follow(idSeguindo: number){
+    this.pessoaService.getPessoaByEmail(localStorage.getItem("email")).subscribe(
+      data => {
+        this.pessoaService.setFollow(idSeguindo, data).subscribe(
+          data => {
+            this.seguir = true;
+            this.ngOnInit();
+          }
+        );
+      }
+    );   
+  }
+
+  verificarFollow(idPerfil: number){
+    this.pessoaService.
+    verificarFollow(+(localStorage.getItem("idUsuario")), idPerfil).
+    subscribe(
+      data => {
+        this.seguir = data;
+      }
+    );
   }
 
 }

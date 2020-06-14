@@ -47,12 +47,11 @@ export class PostComponent implements OnInit {
   }
 
   editar(){
-    this.auxPost.publicacao = this.auxPublicacao
     this.postService.atualizarPost(this.auxPost).subscribe(
       data => {
         this.postService.getPosts(localStorage.getItem("email")).subscribe(
           x => {
-            this.listaPosts = x.reverse();
+            this.listaPosts = x;
             if(data.length == 0){
               this.temPost = false;
             } else {
@@ -70,7 +69,7 @@ export class PostComponent implements OnInit {
         if(data){
           this.postService.getPosts(localStorage.getItem("email")).subscribe(
             x => {
-              this.listaPosts = x.reverse();
+              this.listaPosts = x;
               if(data.length == 0){
                 this.temPost = false;
               } else {
@@ -79,22 +78,9 @@ export class PostComponent implements OnInit {
             }
           );
         }
-      }
-    );
-  }
-
-  onSubmit(){
-    if (this.publicacao.titulo != null &&
-      this.publicacao.conteudo != null &&
-      this.publicacao.localDaPublicacao != null &&
-      this.publicacao.anoDaPublicacao != null) {
-        this.post.emailAutor = localStorage.getItem("email");
-        this.post.publicacao = this.publicacao;
-        this.post.curtidas = 0;
-        this.postService.setPost(this.post).subscribe(
+        this.postService.getPosts(localStorage.getItem("email")).subscribe(
           data => {
-            this.listaPosts.push(data);
-            this.listaPosts.reverse();
+            this.listaPosts = data.reverse();
             if(data.length == 0){
               this.temPost = false;
             } else {
@@ -102,7 +88,27 @@ export class PostComponent implements OnInit {
             }
           }
         );
-    }
+      }
+    );
+  }
+
+  onSubmit(){
+    if (this.post.txt != "" && this.post.txt != null) {
+      this.post.curtidas = 0;
+      this.post.emailAutor = localStorage.getItem("email");
+      
+      this.postService.setPost(this.post).subscribe(
+        data => {
+          this.listaPosts.push(data);
+          if(data.length == 0){
+            this.temPost = false;
+          } else {
+            this.temPost = true;
+          }
+          this.post.txt = "";
+        }
+      );
+  }
   }
 
 }

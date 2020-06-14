@@ -9,6 +9,10 @@ export class Pessoa{
     infos: InfoAdicionais;
     interesses: string;
     trabalho: Trabalho;
+
+    seguindo: any;
+    seguidores: any;
+    postsCurtidos: any;
 }
 
 export class Curriculo {
@@ -41,32 +45,24 @@ export class Trabalho{
 //-------------------------------------------------
 export class Post{
     id: number;
-    publicacao: Publicacao;
+    txt: string;
     emailAutor: string;
     curtidas: number;
+
+    pessoasCurtiram: any;
+    status: string;
+}
+
+export class Artigo {
+    id: number;
+    publicacao: Publicacao;
+    emailAutor: string;
 }
 
 export class Publicacao{
     titulo: string;
-    conteudo: string;
     localDaPublicacao: string;
     anoDaPublicacao: string;
     url: string;
     tags: string;
-}
-
-//------------------------------------------------
-export class Curtida {
-    id: number;
-    idPostCurtido: number;
-    idUsuarioCurtiu: number;
-}
-
-//---------------------------------------------------
-export class PostPessoa {
-    idDoPost: number;
-    publicacao: Publicacao;
-    emailAutor: string;
-    curtidas: number;
-    status: string;   
 }

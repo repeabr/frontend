@@ -4,10 +4,23 @@
 </ol>
 
 <div class="container row">    
-    <div class="col-md-6">
+    <div class="col-md-4">
         <h5 class="h5">
             Perfil de {{info?.nomePessoa}}
         </h5>
+        <button *ngIf="!seguir" class="btn btn-dark my-3" (click)="follow(pessoa.id)">Seguir</button>
+        <button *ngIf="seguir" class="btn btn-secondary my-3" (click)="undoFollow(pessoa.id)">Deixar de seguir</button>
+
+        <div class="row">            
+            <div class="col-6">
+                <button class="btn btn-block btn-dark"  type="button"
+                data-toggle="modal" data-target="#seguindo">Seguindo</button>
+            </div>
+            <div class="col-6">
+                <button class="btn btn-block btn-dark"  type="button"
+                data-toggle="modal" data-target="#seguidores">Seguidores</button>
+            </div>
+        </div>
         
         <div *ngIf="cientista">
             <span><b>Email: </b>{{pessoa?.email}}</span><br>
@@ -36,36 +49,71 @@
             <span><b>Não há interesses cadastrados.</b></span><br>
         </div>
     </div>
-    <div class="col-md-6">
+    
+    <div class="col-md-4">
         <h4 class="mb-3">Posts</h4>
-        <div class="container" *ngIf="listaPostPessoa">    
-            <br>
-            <div *ngFor="let p of listaPostPessoa">
+        <div *ngIf="temPost">   
+            <app-lista-posts></app-lista-posts>
+        </div>
+        <div *ngIf="!temPost">
+            <h5>Não há posts desse usuário</h5>            
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <h4 class="mb-3">Artigos</h4>
+        <div *ngIf="temArtigo">
+            <div *ngFor="let a of artigos">
                 <div class="card text-center">
                     <div class="card-header">
                         <b>
-                        {{p.publicacao.titulo}}
+                        {{a.publicacao.titulo}}
                         </b>
                     </div>
-                    <div class="card-body">
-                      <p class="card-text">{{p.publicacao.conteudo}}</p>
-                    </div>
                     <div class="card-footer text-muted">
-                      {{p.publicacao.localDaPublicacao}} - {{p.publicacao.anoDaPublicacao}}
-                    </div>
-                    <div class="card-footer">
-                        <span>{{p.curtidas}} curtidas</span><br>
-                        <button class="btn btn-block btn-success"
-                        (click)="botaoDeCurtir(p)">
-                            {{p.status}}
-                        </button>   
+                      {{a.publicacao.localDaPublicacao}} - {{a.publicacao.anoDaPublicacao}}
                     </div>
                 </div>
                 <br>
+            </div>               
+        </div>
+        <div *ngIf="!temArtigo">
+            <h5>Não há artigo desse usuário</h5>            
+        </div>
+    </div>
+</div>
+
+<div id="seguindo" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content" *ngIf="seguindo">
+            <div class="modal-header">
+                <h4 class="modal-title">Seguindo</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>                
+            </div>
+            <div class="modal-body" *ngFor="let i of seguindo">
+                <span class="float-left">{{i.infos?.nomePessoa}}</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
             </div>
         </div>
-        <div *ngIf="!temPost">
-            <h5>Não há posts desse usuário</h5>
+    </div>
+</div>
+
+<div id="seguidores" class="modal fade" role="dialog">
+    <div class="modal-dialog" *ngIf="seguidores">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Seguidores</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>                
+            </div>
+            <div class="modal-body" *ngFor="let i of seguidores">
+                <span class="float-left">{{i.infos?.nomePessoa}}</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
         </div>
+
     </div>
 </div>

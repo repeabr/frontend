@@ -1,0 +1,13 @@
+<div class="card">
+    <div class="card-body">
+        <p class="card-text">{{post.txt}}</p>
+    </div>
+    <div class="card-footer text-muted">
+        <br>
+        {{post.curtidas}} pessoa(s) curtiram
+        <div class="float-right">                                
+            <button type="button" class="btn btn-info" (click)="botao(post.id)">{{status}} post</button>
+        </div>
+    </div>
+</div>
+<br>

@@ -14,6 +14,9 @@
             <div class="nav-item">
                 <a class="nav-link text-dark" routerLink="" role="button">Home</a>
             </div>
+            <div class="nav-item" *ngIf="authService.isCientista()">
+                <a class="nav-link text-dark" routerLink="artigo" role="button">Artigo</a>
+            </div>
             <div class="nav-item">
                 <a class="nav-link text-dark" routerLink="atualizar" role="button">Atualizar perfil</a>
             </div>

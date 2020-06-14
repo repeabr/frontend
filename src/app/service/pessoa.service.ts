@@ -14,6 +14,12 @@ export class PessoaService {
   listaPessoasExceto = "https://server-r.herokuapp.com/redesocial/pessoa/listarExceto/";
   atualizaPessoa = "https://server-r.herokuapp.com/redesocial/pessoa/atualizar";
 
+  seguindo = "https://server-r.herokuapp.com/redesocial/pessoa/seguindo/";
+  seguidores = "https://server-r.herokuapp.com/redesocial/pessoa/seguidores/";
+  follow = "https://server-r.herokuapp.com/redesocial/pessoa/follow/";
+  unfollow = "https://server-r.herokuapp.com/redesocial/pessoa/unfollow/"
+  verificaFollow = "https://server-r.herokuapp.com/redesocial/pessoa/verificaFollow/"
+
   constructor(private http: HttpClient) { }
 
   setPessoa(pessoa: Pessoa): Observable<any>{
@@ -34,5 +40,25 @@ export class PessoaService {
 
   updatePessoa(pessoa: Pessoa): Observable<any>{
     return this.http.put<any>(this.atualizaPessoa, pessoa);
+  }
+  
+  getSeguindo(id: number): Observable<any[]>{
+    return this.http.get<any[]>(this.seguindo + id);
+  }
+
+  getSeguidores(id: number): Observable<any[]>{
+    return this.http.get<any[]>(this.seguidores + id);
+  }
+
+  setFollow(idSeguindo: number, pessoa: Pessoa): Observable<any>{
+    return this.http.get<any>(this.follow + pessoa.id + "/" + idSeguindo);
+  }
+
+  undoFollow(idSeguindo: number, pessoa: Pessoa): Observable<any>{
+    return this.http.get<any>(this.unfollow + pessoa.id + "/" + idSeguindo);
+  }
+
+  verificarFollow(id: number, idASeguir: number): Observable<any>{
+    return this.http.get<any>(this.verificaFollow + id + "/" + idASeguir);
   }
 }

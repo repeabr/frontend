@@ -30,7 +30,10 @@ export class LoginComponent implements OnInit {
       formacao: null,
       infos: null,
       interesses: null,
-      trabalho: null
+      trabalho: null,
+      seguindo: null,
+      seguidores: null,
+      postsCurtidos: null
     }
   }
 
@@ -43,12 +46,16 @@ export class LoginComponent implements OnInit {
 
     this.loginService.login(this.pessoa).subscribe(
       data => {
-        if (data) {          
+        if (data) {   
           localStorage.setItem("email", this.pessoa.email);
           this.pessoaService.getPessoaByEmail(localStorage.getItem("email")).subscribe(
             x => {
-              console.log(x);
               localStorage.setItem("idUsuario", x.id.toString());
+              if (x.curriculo != null){
+                localStorage.setItem("tipoDeUsuario", "cientista");
+                localStorage.getItem("tipoDeUsuario");
+              } 
+              localStorage.getItem("tipoDeUsuario");
             }
           )
           this.router.navigateByUrl("");

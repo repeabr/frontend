@@ -9,6 +9,7 @@ import { AtualizarComponent } from './atualizar/atualizar.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { InteresseComponent } from './interesse/interesse.component';
 import { CadastroInteresseComponent } from './cadastro-interesse/cadastro-interesse.component';
+import { ArtigoComponent } from './artigo/artigo.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path:"atualizar", component: AtualizarComponent, canActivate: [AuthGuard]},
   {path:"perfil", component: PerfilComponent, canActivate: [AuthGuard]},
   {path:"interesses", component: InteresseComponent, canActivate: [AuthGuard]},
+  {path:"artigo", component: ArtigoComponent, canActivate: [AuthGuard]},
 
   {path: '**', redirectTo: ''}
 ];

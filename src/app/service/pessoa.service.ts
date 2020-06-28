@@ -24,6 +24,7 @@ export class PessoaService {
 
   constructor(private http: HttpClient) { }
 
+
   getNotificacao(email: string): Observable<any[]>{
     return this.http.get<any[]>(this.notificacao + email);
   }

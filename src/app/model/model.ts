@@ -78,4 +78,5 @@ export class Notificacao{
     tipoPublicacao: string;
     titulo: string;
     autor: String;
+    visualizacao: boolean;
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PessoaService } from '../service/pessoa.service';
-import { Pessoa, InfoAdicionais, Curriculo, Formacao, Trabalho } from '../model/model';
+import { Pessoa, InfoAdicionais, Curriculo, Formacao, Trabalho, Notificacao } from '../model/model';
 
 @Component({
   selector: 'app-pagina-inicial',
@@ -26,11 +26,39 @@ export class PaginaInicialComponent implements OnInit {
   dataNascimento: string;
   tempoEmAtividade: string;
 
+  listaDeNotificacao = [];
+  temNotificacao = false;
+  notificacoes = [];
+
   constructor(private pessoaService: PessoaService) {
   }
 
   ngOnInit() {
     this.getPessoa();
+    this.getNotificacao();
+  }
+
+  getNotificacao(){
+    this.pessoaService.getNotificacao(localStorage.getItem("email")).subscribe(
+      data => {
+        this.listaDeNotificacao = data;
+        if(this.listaDeNotificacao.length > 0){
+          for (let i = 0; i < this.listaDeNotificacao.length; i++) {
+            if(this.listaDeNotificacao[i].tipoPublicacao != null && this.listaDeNotificacao[i].visualizacao == false){              
+              let notificacao: Notificacao = new Notificacao();
+              notificacao.tipoPublicacao = this.listaDeNotificacao[i].tipoPublicacao;
+              notificacao.titulo = this.listaDeNotificacao[i].titulo;
+              notificacao.autor = this.listaDeNotificacao[i].autor;
+              notificacao.visualizacao = this.listaDeNotificacao[i].visualizacao;
+              this.notificacoes.unshift(notificacao);
+            }
+          }
+        }      
+        if(this.notificacoes.length > 0){
+          this.temNotificacao = true;
+        } 
+      }
+    );
   }
 
   getSeguindo(id: any){

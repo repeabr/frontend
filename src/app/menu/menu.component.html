@@ -14,26 +14,7 @@
             <div class="nav-item">
                 <a class="nav-link text-dark" routerLink="" role="button">Home</a>
             </div>
-            <div class="nav-item">
-                <div class="dropdown">
-                    <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Notificação <i style="font-size:20px" class="fa">&#xf0f3;</i>
-                    </button>
-                    <div *ngIf="temNotificacao">
-                        <div class="dropdown-menu"  style="max-height: 400px; max-width: 400px; overflow: auto;" aria-labelledby="dropdownMenu2" >
-                            <button class="dropdown-item" *ngFor="let n of notificacoes" type="button">
-                                <b>{{n.tipoPublicacao}}</b><br>
-                                {{n?.titulo}} - {{n?.autor}}
-                            </button>                       
-                        </div>                     
-                    </div>
-                    <div *ngIf="!temNotificacao" >
-                        <div class="dropdown-menu" style="max-height: 400px; max-width: 400px; overflow: auto;" aria-labelledby="dropdownMenu2">
-                            <button class="dropdown-item" type="button">Não há notificação</button>
-                        </div>
-                    </div>                    
-                </div>
-            </div>
+            
             <div class="nav-item" *ngIf="authService.isCientista()">
                 <a class="nav-link text-dark" routerLink="artigo" role="button">Artigo</a>
             </div>

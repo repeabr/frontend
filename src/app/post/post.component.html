@@ -9,12 +9,14 @@
     </div>    
 </form>
 
+
 <div class="container" *ngIf="temPost">    
     <br>
+    <h3>Mais curtidos</h3>
     <div *ngFor="let p of listaPosts">
         <div class="card text-center">
             <div class="card-body">
-              <p class="card-text">{{p.txt}}</p>
+                <p class="card-text">{{p.txt}}</p>
             </div>
             <div class="card-footer text-muted">
                 {{p.curtidas}} curtidas

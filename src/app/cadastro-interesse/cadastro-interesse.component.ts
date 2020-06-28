@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./cadastro-interesse.component.css']
 })
 export class CadastroInteresseComponent implements OnInit {
-  searchText;
+  searchTextz;
   p: number = 1;
 
   pessoa: Pessoa = new Pessoa();

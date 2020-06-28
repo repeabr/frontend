@@ -5,7 +5,7 @@
 
 <div *ngIf="temMembros" class="container">
     <div class="form-group">
-        <input type="text" class="form-control" placeholder="Pesquisar..." [(ngModel)]="searchText">
+        <input type="text" class="form-control" placeholder="buscar pesquisadores por nome, instituição, temas de interesse e palavras-chave" [(ngModel)]="searchText">
     </div>
     <div class="row">
         <div *ngFor="let m of membros | filter: searchText">

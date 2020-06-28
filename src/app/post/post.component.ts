@@ -21,10 +21,15 @@ export class PostComponent implements OnInit {
   auxPublicacao: Publicacao = new Publicacao();
 
 
-  constructor(private postService: PostService, private pessoaService: PessoaService) { 
+  constructor(private postService: PostService, private pessoaService: PessoaService) {     
+  }
+
+  ngOnInit() {
     this.postService.getPosts(localStorage.getItem("email")).subscribe(
       data => {
-        this.listaPosts = data.reverse();
+        this.listaPosts = data.slice(0,10).sort(function (a, b) {	
+          return (a.curtidas < b.curtidas) ? 1 : ((b.curtidas < a.curtidas) ? -1 : 0);
+        });
         if(data.length == 0){
           this.temPost = false;
         } else {
@@ -32,9 +37,6 @@ export class PostComponent implements OnInit {
         }
       }
     );
-  }
-
-  ngOnInit() {
   }
 
   getPost(post: Post){
@@ -57,6 +59,7 @@ export class PostComponent implements OnInit {
             } else {
               this.temPost = true;
             }
+            this.ngOnInit();
           }
         );
       }
@@ -67,29 +70,11 @@ export class PostComponent implements OnInit {
     this.postService.removerPost(this.auxPost).subscribe(
       data => {
         if(data){
-          this.postService.getPosts(localStorage.getItem("email")).subscribe(
-            x => {
-              this.listaPosts = x;
-              if(data.length == 0){
-                this.temPost = false;
-              } else {
-                this.temPost = true;
-              }
-            }
-          );
-        }
-        this.postService.getPosts(localStorage.getItem("email")).subscribe(
-          data => {
-            this.listaPosts = data.reverse();
-            if(data.length == 0){
-              this.temPost = false;
-            } else {
-              this.temPost = true;
-            }
-          }
-        );
+          this.ngOnInit();
+        }        
       }
     );
+    
   }
 
   onSubmit(){
@@ -108,7 +93,8 @@ export class PostComponent implements OnInit {
           this.post.txt = "";
         }
       );
-  }
+    }
+    this.ngOnInit();
   }
 
 }

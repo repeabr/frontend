@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest, HttpHeaders, HttpEvent } from '@angular/common/http';
 import { Artigo } from '../model/model';
 import { Observable } from 'rxjs';
 
@@ -13,6 +13,7 @@ export class ArtigoService {
   readByIdArtigo = "https://server-r.herokuapp.com/redesocial/artigo/procuraArtigoPorId/";
   updateArtigo = "https://server-r.herokuapp.com/redesocial/artigo/atualizaArtigo";
   deleteArtigo = "https://server-r.herokuapp.com/redesocial/artigo/deletaArtigo/";
+
 
   constructor(private http: HttpClient) { }
 
@@ -35,4 +36,5 @@ export class ArtigoService {
   removeArtigo(artigo: Artigo): Observable<any>{
     return this.http.delete<any>(this.deleteArtigo + artigo.id);
   }
+
 }

@@ -7,17 +7,17 @@
     <form (ngSubmit)="onSubmit()" ngNativeValidate>
         <div class="form-group">
             <input type="text" class="form-control" placeholder="Titulo" name="titulo" [(ngModel)]="publicacao.titulo"
-                required="true">
+                [required]="true">
         </div>
 
         <div class="form-group">
             <input placeholder="Local da publicação" type="text" class="form-control" name="localDaPublicacao"
-                [(ngModel)]="publicacao.localDaPublicacao" required="true">
+                [(ngModel)]="publicacao.localDaPublicacao" [required]="true">
         </div>
 
         <div class="form-group">
             <input placeholder="Ano da publicação" class="form-control" type="text" name="anoDaPublicacao"
-                [(ngModel)]="publicacao.anoDaPublicacao" required="true">
+                [(ngModel)]="publicacao.anoDaPublicacao" [required]="true">
         </div>
 
         <div class="form-group">
@@ -26,7 +26,13 @@
         </div>
 
         <div class="form-group">
-            <input type="text" class="form-control" [(ngModel)]="publicacao.tags" name="tags" placeholder="Tags">
+            <input type="text" class="form-control" [(ngModel)]="publicacao.tags" name="tags" 
+            placeholder="Tags (Separe as tags por vírgulas)">
+        </div>
+
+        <div class="form-group">
+            <input type=file (change)=onFileChanged($event)>
+            <img [src]="imgURL" height=200 *ngIf="imgURL">
         </div>
         <button class="btn btn-primary" type="submit">Postar artigo</button>
     </form>
@@ -44,8 +50,15 @@
                     <p class="card-text">{{artigo.publicacao?.localDaPublicacao}}</p>
                     <p class="card-text">{{artigo.publicacao?.anoDaPublicacao}}</p>
                     <p class="card-text">{{artigo.publicacao?.url}}</p>
+                    <div class="card-text">
+                        <span *ngIf="artigo.docName"><b><i style="font-size:24px" class="fa">&#xf15b;</i> {{artigo.docName}}</b></span>
+                    </div>
+                    
                 </div>
                 <div class="card-footer text-muted">
+                    <div class="float-left mr-3" *ngFor="let t of artigo.listaTags">
+                        <button class="btn btn-info" disabled>{{t}}</button>
+                    </div>
                     <div class="btn-group float-right" role="group">
                         <button type="button" class="btn btn-dark" (click)="getArtigo(artigo)" data-toggle="modal"
                             data-target="#editar">Editar</button>
@@ -90,6 +103,19 @@
                             <input type="text" placeholder="Tags" class="form-control" name="conteudo"
                             [(ngModel)]="auxPublicacao.tags"/>
                         </div> 
+                        <div class="card-text" *ngIf="!mudarArq">
+                            <span *ngIf="artigo.docName"><b><i style="font-size:24px" class="fa"> &#xf15b;</i> {{artigo.docName}}</b></span>
+                        </div>
+                        <div class="form-group" *ngIf="mudarArq">
+                            <input type=file (change)=onFileChanged($event)>
+                            <img [src]="imgURL" height=200 *ngIf="imgURL">
+                        </div>
+                        <div class="my-3" *ngIf="!mudarArq">
+                            <button type="button" class="btn btn-dark"(click)="selecionar()">Selecionar outro arquivo</button>
+                        </div>
+                        <div class="my-3" *ngIf="mudarArq">
+                            <button type="button" class="btn btn-dark"(click)="selecionar()">Voltar arquivo anterior</button>
+                        </div>
                 </div> 
                              
                 <div class="modal-footer">

@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgxPaginationModule } from 'ngx-pagination'; 
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { FileUploadModule } from 'ng2-file-upload';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -47,7 +48,8 @@ import { PostPerfilComponent } from './post-perfil/post-perfil.component';
     FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    FileUploadModule
   ],
   providers: [],
   bootstrap: [AppComponent]

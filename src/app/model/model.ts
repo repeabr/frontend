@@ -1,3 +1,8 @@
+export class Interesse{
+    id: number;
+    nome: string;
+}
+
 export class Pessoa{
     id: number;
 
@@ -57,6 +62,8 @@ export class Artigo {
     id: number;
     publicacao: Publicacao;
     emailAutor: string;
+    listaTags = [];
+    docName: string;
 }
 
 export class Publicacao{
@@ -66,3 +73,4 @@ export class Publicacao{
     url: string;
     tags: string;
 }
+

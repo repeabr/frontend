@@ -13,7 +13,7 @@
             <div *ngIf="temNotificacao">
                 <div class="dropdown-menu" style="max-height: 200px; max-width: 400px; overflow: auto;"
                     aria-labelledby="dropdownMenu2">
-                    <button class="dropdown-item" *ngFor="let n of notificacoes" type="button" (click)="atualizaNotificacao(n)">
+                    <button class="dropdown-item" *ngFor="let n of notificacoes" type="button">
                         <b>{{n.tipoPublicacao}}</b><br>
                         {{n?.titulo}} - {{n?.autor}}
                     </button>

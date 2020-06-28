@@ -97,7 +97,7 @@ export class PerfilComponent implements OnInit {
         }
 
         this.getSeguidores(data.id);
-        this.getSeguindo(data.id)
+        this.getSeguindo(data.id);
         this.verificarFollow(data.id); 
         this.getArtigos();
         this.getPosts();
@@ -140,7 +140,7 @@ export class PerfilComponent implements OnInit {
         this.seguindo = data;
         console.log(data);
       }      
-    )
+    );
   }
 
   getSeguidores(a: any){
@@ -149,7 +149,7 @@ export class PerfilComponent implements OnInit {
         this.seguidores = data;  
         console.log(data);
       }      
-    )
+    );
   }
 
   verificarPessoa() {

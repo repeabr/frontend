@@ -69,11 +69,13 @@ export class ArtigoComponent implements OnInit {
   }
 
   onUpload(artigo: any) {
-    const uploadData = new FormData();
-    uploadData.append('myFile', this.selectedFile, this.selectedFile.nome);
-    
-    this.httpClient.post('https://server-r.herokuapp.com/redesocial/artigo/arquivo/save/'+ artigo.id, uploadData)
-    .subscribe();  
+    if(this.selectedFile != null){
+      const uploadData = new FormData();
+      uploadData.append('myFile', this.selectedFile, this.selectedFile.nome);
+      
+      this.httpClient.post('https://server-r.herokuapp.com/redesocial/artigo/arquivo/save/'+ artigo.id, uploadData)
+      .subscribe(); 
+    } 
    }
 
   getArtigos(){

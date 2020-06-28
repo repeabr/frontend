@@ -18,6 +18,9 @@ export class PaginaInicialComponent implements OnInit {
 
   temInteresses: boolean;
   interesses = [];
+
+  seguindo = [];
+  seguidores = [];
   
   cientista: boolean;
   dataNascimento: string;
@@ -28,6 +31,24 @@ export class PaginaInicialComponent implements OnInit {
 
   ngOnInit() {
     this.getPessoa();
+  }
+
+  getSeguindo(id: any){
+    this.pessoaService.getSeguindo(id).subscribe( 
+      data => {
+        this.seguindo = data;
+        console.log(data);
+      }      
+    );
+  }
+
+  getSeguidores(id: any){
+    this.pessoaService.getSeguidores(id).subscribe( 
+      data => {
+        this.seguidores = data;  
+        console.log(data);
+      }      
+    );
   }
 
   getPessoa() {
@@ -46,6 +67,9 @@ export class PaginaInicialComponent implements OnInit {
         let array = str.split("-");
         let final = array[2] + "/" + array[1] + "/" + array[0];
         this.dataNascimento = final.toString();
+
+        this.getSeguidores(data.id);
+        this.getSeguindo(data.id);
 
         let dataInicioCientista = data.infos.dataInicioCientista;
         const now = new Date();

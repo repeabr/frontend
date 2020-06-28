@@ -74,3 +74,8 @@ export class Publicacao{
     tags: string;
 }
 
+export class Notificacao{
+    tipoPublicacao: string;
+    titulo: string;
+    autor: String;
+}

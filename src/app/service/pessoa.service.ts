@@ -20,7 +20,13 @@ export class PessoaService {
   unfollow = "https://server-r.herokuapp.com/redesocial/pessoa/unfollow/"
   verificaFollow = "https://server-r.herokuapp.com/redesocial/pessoa/verificaFollow/"
 
+  notificacao = "https://server-r.herokuapp.com/redesocial/pessoa/notificacao/";
+
   constructor(private http: HttpClient) { }
+
+  getNotificacao(email: string): Observable<any[]>{
+    return this.http.get<any[]>(this.notificacao + email);
+  }
 
   setPessoa(pessoa: Pessoa): Observable<any>{
     return this.http.post<any>(this.cadastro, pessoa);

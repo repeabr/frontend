@@ -2,12 +2,11 @@
     <li class="breadcrumb-item">Home</li>
 </ol>
 
-<div class="container row">
-    <div class="col-md-6">
+<div class="container-fluid row">
+    <div class="col-md-3 ">
         <h5 class="mb-3">Olá, {{infos?.nomePessoa}}</h5>
 
         <div *ngIf="cientista">
-            <span>{{pessoa?.email}}</span><br>
             <span>{{formacao?.nivelDeFormacao}}</span><br>
             <span>{{formacao?.localDeFormacao}}</span><br>
             <span>{{dataNascimento}}</span><br>
@@ -21,20 +20,36 @@
             <span>{{formacao?.localDeFormacao}}</span><br>
             <span><b>Data de nascimento: </b>{{dataNascimento}}</span><br>
         </div>
-
         <h6 class="mt-3">Interesses:</h6>
         <div *ngIf="temInteresses">
-            <ul class="list-group" *ngFor="let x of interesses;">
-                <li class="list-group-item">{{x}}</li>
-            </ul>
+            <div class="btn-group" *ngFor="let x of interesses;">
+                <button class="btn btn-dark m-3" disabled>{{x}}</button>
+            </div>
         </div>
         <div *ngIf="!temInteresses">
             <span><b>Você ainda não cadastrou interesses.</b></span><br>
             <span>Para adicionar interesse(s) <a routerLink="interesses">clique aqui.</a></span>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-7">
         <h5 class="mb-3">Post</h5>
         <app-post></app-post>
+    </div>
+    <div class="col-md-2">
+        <h5 class="mb-3">Seguidores</h5>
+        <div style="height: 200px; overflow-y: auto; ">
+            <ul class="list-group" *ngFor="let x of seguidores;">
+                <li class="list-group-item">{{x.infos?.nomePessoa}}</li>
+            </ul>
+        </div>        
+
+        <hr>
+
+        <h5 class="my-3">Seguindo</h5>
+        <div style="height: 200px;  overflow-y: auto;">
+            <ul class="list-group" *ngFor="let x of seguindo;">
+                <li class="list-group-item">{{x.infos?.nomePessoa}}</li>
+            </ul>
+        </div>        
     </div>
 </div>

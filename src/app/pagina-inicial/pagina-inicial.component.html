@@ -71,7 +71,7 @@
 
         <h5 class="my-3">Seguindo</h5>
         <div style="height: 200px;  overflow-y: auto;">
-            <div class="btn-group" *ngFor="let x of seguindo;">
+            <div class="list-group" *ngFor="let x of seguindo;">
                 <button class="btn btn-dark" (click)="goToPerfil(x)">{{x.infos?.nomePessoa}}</button>
             </div>
         </div>

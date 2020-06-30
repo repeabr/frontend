@@ -22,7 +22,8 @@ export class ArtigosPerfilComponent implements OnInit {
     console.log(this.listaArtigo);
   }
 
-  getListaArtigos(){
+  getListaArtigos(){    
+    let temArquivo: boolean = false;
     this.artigoService.buscaArtigoPorEmail(localStorage.getItem("emailPerfil")).subscribe(
       data => {
         this.listaArtigo = data.reverse();
@@ -41,6 +42,10 @@ export class ArtigosPerfilComponent implements OnInit {
                   if(data != null){
                     this.aux = data; 
                     this.listaArtigo[i].docName = this.aux.docName;
+                    temArquivo = true;
+                  }
+                  else if (data == null){
+                    temArquivo = false;
                   }
                 }
               );  

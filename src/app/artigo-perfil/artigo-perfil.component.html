@@ -10,8 +10,7 @@
     <div class="card-footer text-muted">
         {{artigo.publicacao?.localDaPublicacao}} - {{artigo.publicacao?.anoDaPublicacao}}
         <div class="card-text">
-            <span *ngIf="documento.docName"><b><i style="font-size:24px" class="fa">&#xf15b;</i>
-                    {{documento.docName}}</b></span>
+            <span><b>{{documento?.docName}}</b></span>
         </div>
         <br>
         {{artigo?.curtidas}} pessoa(s) curtiram

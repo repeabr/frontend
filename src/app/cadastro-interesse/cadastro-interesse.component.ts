@@ -25,9 +25,9 @@ export class CadastroInteresseComponent implements OnInit {
     this.pessoaService.getPessoaByEmail(localStorage.getItem("emailCadastrado")).subscribe(
       data => {
         this.pessoa = data;
-        if(data.interesses != null){
+        if(this.pessoa.interesses != null){
           this.selecionados = data.interesses.split(",")
-          if (data.interesses == "" || data.interesses == null) {
+          if (this.pessoa.interesses == "" || data.interesses == null) {
             this.jaTemInteresse = true;
           } else {
             this.jaTemInteresse = false;

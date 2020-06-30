@@ -30,7 +30,6 @@ export class CadastroComponent implements OnInit {
   constructor(private pessoaService: PessoaService, private router: Router) { }
 
   ngOnInit() {
-    console.log(this.submiter);
   }
 
   brasileiro() {

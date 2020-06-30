@@ -34,6 +34,7 @@ export class InfoAdicionais {
     dataNascimento: string;
     dataInicioCientista: string;
     cpf: string;
+    rg: string;
 }
 
 export class Glossario{

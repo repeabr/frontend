@@ -117,22 +117,20 @@ export class CadastroComponent implements OnInit {
       this.pessoa.senha != null &&
       this.infos.dataNascimento != null &&
       this.formacao.nivelDeFormacao != null &&
-      this.formacao.localDeFormacao != null) {
+      this.formacao.localDeFormacao != null) {  
+            
       this.pessoa.formacao = this.formacao;
       localStorage.setItem("emailCadastrado", this.pessoa.email);
-
       this.infos.dataInicioCientista = "";
       this.pessoa.infos = this.infos;
       this.pessoa.interesses = "";
-
       this.curriculo = null;
       this.trabalho = null;
-
-      this.submiter = false;
-
+      
+      this.formularioCompleto = true;
       this.verificaIdade();
     }
-    if (!this.submiter) {
+    if (this.formularioCompleto && !this.menorDeIdade) {
       this.pessoaService.getPessoaByEmail(this.pessoa.email).subscribe(
         data => {
           if (data == null) {
@@ -143,15 +141,15 @@ export class CadastroComponent implements OnInit {
             );
             this.erro = false;
             this.sucesso = true;
+            this.submiter = false;
             this.router.navigateByUrl("/cadastro-interesses");
           } else {
             this.erro = true;
             this.sucesso = false;
           }
         }
-      )
+      );
     }
   }
-
 
 }

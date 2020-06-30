@@ -10,45 +10,62 @@
     <form *ngIf="!atualizado" ngNativeValidate>
         <div class="form-group row">
             <label for="nomePessoa">Nome:</label>
-            <input id="nomePessoa" type="text" [(ngModel)]="infos.nomePessoa" class="form-control" name="nomePessoa" required="true">
+            <input id="nomePessoa" type="text" [(ngModel)]="infos.nomePessoa" class="form-control" 
+            name="nomePessoa" [required]="true">
         </div>
         <div class="form-group row">
             <label for="senha">Senha:</label>
-            <input id="senha" type="password" [(ngModel)]="pessoa.senha" class="form-control" name="senha" required="true">
+            <input id="senha" type="password" [(ngModel)]="pessoa.senha" class="form-control" name="senha" 
+            [required]="true">
         </div>
         <div class="form-group row">
             <label for="nivelDeFormacao">Nível de Formação:</label>
-            <input id="nivelDeFormacao" type="text" [(ngModel)]="formacao.nivelDeFormacao" class="form-control" name="nivelDeFormacao" required="true">
+            <input id="nivelDeFormacao" type="text" [(ngModel)]="formacao.nivelDeFormacao" class="form-control" 
+            name="nivelDeFormacao" [required]="true">
         </div>
         <div class="form-group row">
             <label for="localDeFormacao">Local de Formação:</label>
-            <input id="localDeFormacao" type="text" [(ngModel)]="formacao.localDeFormacao" class="form-control" name="localDeFormacao" required="true">
+            <input id="localDeFormacao" type="text" [(ngModel)]="formacao.localDeFormacao" class="form-control" 
+            name="localDeFormacao" [required]="true">
         </div>
         <div class="form-group row">
             <label for="dataNascimento">Data de Nascimento:</label>
             <input id="dataNascimento" type="date" [(ngModel)]="infos.dataNascimento" class="form-control"
-                name="dataNascimento" required="true">
+                name="dataNascimento" [required]="true">
         </div>
 
         <div *ngIf="cientista" class="form-group row">
             <label for="nomeInstituicao">Nome da instituição onde trabalha:</label>
-            <input id="nomeInstituicao" type="text" [(ngModel)]="trabalho.nomeInstituicao" class="form-control" name="nomeInstituicao" required="true">
+            <input id="nomeInstituicao" type="text" [(ngModel)]="trabalho.nomeInstituicao" 
+            class="form-control" name="nomeInstituicao" [required]="true">
         </div>
         <div *ngIf="cientista" class="form-group row">
             <label for="cidadeOndeTrabalha">Cidade da instituição:</label>
-            <input id="cidadeOndeTrabalha" type="text" [(ngModel)]="trabalho.cidadeOndeTrabalha" class="form-control" name="cidadeOndeTrabalha" required="true">
+            <input id="cidadeOndeTrabalha" type="text" [(ngModel)]="trabalho.cidadeOndeTrabalha" 
+            class="form-control" name="cidadeOndeTrabalha" [required]="true">
         </div>
         <div *ngIf="cientista" class="form-group row">
             <label for="estadoOndeTrabalha">Estado da instituição:</label>
-            <input id="estadoOndeTrabalha" type="text" [(ngModel)]="trabalho.estadoOndeTrabalha" class="form-control" name="estadoOndeTrabalha" required="true">
+            <input id="estadoOndeTrabalha" type="text" [(ngModel)]="trabalho.estadoOndeTrabalha" 
+            class="form-control" name="estadoOndeTrabalha" [required]="true">
         </div>
         <div *ngIf="cientista" class="form-group row">
             <label for="dataInicioCientista">Data em que começou a trabalhar como cientista:</label>
-            <input id="dataInicioCientista" type="date" [(ngModel)]="infos.dataInicioCientista" class="form-control" name="dataInicioCientista" required="true">
+            <input id="dataInicioCientista" type="date" [(ngModel)]="infos.dataInicioCientista" 
+            class="form-control" name="dataInicioCientista" [required]="true">
         </div>
         <div *ngIf="cientista" class="form-group row">
             <label for="curriculo">Curriculo Lattes:</label>
-            <input id="curriculo" type="url" [(ngModel)]="curriculo.link" class="form-control" name="curriculo" required="true">
+            <input id="curriculo" type="url" [(ngModel)]="curriculo.link" class="form-control" name="curriculo" 
+            [required]="true">
+        </div>
+        <div *ngIf="!cientista" class="form-group row">
+            <label for="rg">RG:</label>
+            <input id="rg" type="text" [(ngModel)]="infos.rg" class="form-control" name="rg" [required]="true">
+        </div>
+        <div *ngIf="!cientista" class="form-group row">
+            <label for="cpf">CPF:</label>
+            <input id="cpf" type="text" [(ngModel)]="infos.cpf" class="form-control" name="cpf" [required]="true">
         </div>
 
         <div class="form-group row">

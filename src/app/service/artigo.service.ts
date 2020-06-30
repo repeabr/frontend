@@ -14,8 +14,24 @@ export class ArtigoService {
   updateArtigo = "https://server-r.herokuapp.com/redesocial/artigo/atualizaArtigo";
   deleteArtigo = "https://server-r.herokuapp.com/redesocial/artigo/deletaArtigo/";
 
+  analisaArtigo = "https://server-r.herokuapp.com/redesocial/artigo/analisaArtigo/";
+  undoCurtir = "https://server-r.herokuapp.com/redesocial/artigo/undoCurtir/";
+  curtir = "https://server-r.herokuapp.com/redesocial/artigo/curtir/";
+
 
   constructor(private http: HttpClient) { }
+  
+  analisarArtigo(idArtigoCurtido: number, idPessoaCurtiu: number) : Observable<any>{
+    return this.http.get<any>(this.analisaArtigo + idArtigoCurtido + "/" + idPessoaCurtiu);
+  }
+
+  undoCurtirArtigo(idPessoaCurtiu: number, idArtigoCurtido: number): Observable<any>{
+    return this.http.get<any>(this.undoCurtir + idPessoaCurtiu + "/" + idArtigoCurtido);
+  }
+
+  curtirArtigo(idPessoaCurtiu: number, idArtigoCurtido: number): Observable<any>{
+    return this.http.get<any>(this.curtir + idPessoaCurtiu + "/" + idArtigoCurtido);
+  }
 
   criaArtigo(artigo: Artigo): Observable<any>{
     return this.http.post<any>(this.createArtigo, artigo);

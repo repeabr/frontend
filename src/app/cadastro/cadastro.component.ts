@@ -70,6 +70,7 @@ export class CadastroComponent implements OnInit {
       this.pessoa.infos = this.infos;
       this.pessoa.trabalho = this.trabalho;
       this.formularioCompleto = true;
+      this.pessoa.interesses = "";
 
       this.verificaIdade();
 
@@ -123,6 +124,7 @@ export class CadastroComponent implements OnInit {
 
       this.infos.dataInicioCientista = "";
       this.pessoa.infos = this.infos;
+      this.pessoa.interesses = "";
 
       this.curriculo = null;
       this.trabalho = null;

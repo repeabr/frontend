@@ -5,6 +5,8 @@
 <div class="container-fluid row">
     <div class="col-md-3 ">
         <h5 class="mb-3">Olá, {{infos?.nomePessoa}}</h5>
+        <img src="https://www.pngitem.com/pimgs/m/294-2947257_interface-icons-user-avatar-profile-user-avatar-png.png"
+            height="100" alt="avatar">
         <div class="dropdown">
             <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
@@ -52,11 +54,12 @@
             <span>Para adicionar interesse(s) <a routerLink="interesses">clique aqui.</a></span>
         </div>
     </div>
-    <div class="col-md-7">
-        <h5 class="mb-3">Post</h5>
+
+    <div class="col-md-6">
         <app-post></app-post>
     </div>
-    <div class="col-md-2">
+
+    <div class="col-md-3">
         <h5 class="mb-3">Seguidores</h5>
         <div style="height: 200px; overflow-y: auto; ">
             <ul class="list-group" *ngFor="let x of seguidores;">

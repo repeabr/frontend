@@ -60,22 +60,10 @@
         </div>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-4" *ngIf="isCientista">
         <h4 class="mb-3">Artigos</h4>
         <div *ngIf="temArtigo">
-            <div *ngFor="let a of artigos">
-                <div class="card text-center">
-                    <div class="card-header">
-                        <b>
-                        {{a.publicacao.titulo}}
-                        </b>
-                    </div>
-                    <div class="card-footer text-muted">
-                      {{a.publicacao.localDaPublicacao}} - {{a.publicacao.anoDaPublicacao}}
-                    </div>
-                </div>
-                <br>
-            </div>               
+            <app-artigos-perfil></app-artigos-perfil>               
         </div>
         <div *ngIf="!temArtigo">
             <h5>Não há artigo desse usuário</h5>            

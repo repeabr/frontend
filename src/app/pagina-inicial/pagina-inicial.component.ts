@@ -30,6 +30,8 @@ export class PaginaInicialComponent implements OnInit {
   temNotificacao = false;
   notificacoes = [];
 
+  isCientista = false;
+
   constructor(private pessoaService: PessoaService) {
   }
 

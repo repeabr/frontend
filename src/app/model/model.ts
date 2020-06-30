@@ -64,6 +64,7 @@ export class Artigo {
     emailAutor: string;
     listaTags = [];
     docName: string;
+    curtidas: number;
 }
 
 export class Publicacao{

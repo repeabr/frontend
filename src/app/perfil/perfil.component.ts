@@ -35,7 +35,7 @@ export class PerfilComponent implements OnInit {
   temPost = false;
   temArtigo = false;
 
-  verifica: any;
+  verifica = false;
 
   constructor(private pessoaService: PessoaService, private artigoService: ArtigoService,
     private postService: PostService) {    
@@ -43,6 +43,7 @@ export class PerfilComponent implements OnInit {
 
   ngOnInit() {
     this.getPessoa();
+    this.isCientista();
   }
 
   isCientista(){

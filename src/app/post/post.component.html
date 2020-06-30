@@ -1,35 +1,63 @@
-<form (ngSubmit)="onSubmit()" ngNativeValidate>
-    <div class="container">
-        <div class="form-group">
-            <textarea type="text" placeholder="Conteúdo" class="form-control" name="conteudo"
-            [(ngModel)]="post.txt" required="true"></textarea>
+<div class="container">
+    <form (ngSubmit)="onSubmit()" ngNativeValidate>
+        <div class="container">
+            <div class="form-group">
+                <textarea type="text" placeholder="Poste alguma mensagem" class="form-control" name="conteudo"
+                [(ngModel)]="post.txt" required="true"></textarea>
+            </div>
+    
+            <button class="btn btn-primary" type="submit">Postar</button>
+        </div>    
+    </form>
+    
+    <div *ngIf="temPost" class="row">
+        <div *ngIf="!isCientista" class="col-md-12">
+            <br>
+            <h3 >Mensagens mais curtidas</h3>
+            <div *ngFor="let p of listaPosts">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <p class="card-text">{{p.txt}}</p>
+                    </div>
+                    <div class="card-footer text-muted">
+                        {{p.curtidas}} curtidas
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" class="btn btn-warning mr-3" (click)="getPost(p)" data-toggle="modal"
+                            data-target="#editar">Editar</button>
+    
+                        <button type="button" class="btn btn-danger" (click)="getPost(p)" data-toggle="modal"
+                            data-target="#excluir">Excluir</button>
+                    </div>
+                </div>
+                <br>
+            </div>
         </div>
-
-        <button class="btn btn-primary" type="submit">Postar</button>
-    </div>    
-</form>
-
-
-<div class="container" *ngIf="temPost">    
-    <br>
-    <h3>Mais curtidos</h3>
-    <div *ngFor="let p of listaPosts">
-        <div class="card text-center">
-            <div class="card-body">
-                <p class="card-text">{{p.txt}}</p>
+        <div *ngIf="isCientista" class="col-md-6">
+            <br>
+            <h3>Mensagens mais curtidas</h3>
+            <div *ngFor="let p of listaPosts">
+                <div class="card text-center">
+                    <div class="card-body">
+                        <p class="card-text">{{p.txt}}</p>
+                    </div>
+                    <div class="card-footer text-muted">
+                        {{p.curtidas}} curtidas
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" class="btn btn-warning m-3" (click)="getPost(p)" data-toggle="modal"
+                            data-target="#editar">Editar</button>
+    
+                        <button type="button" class="btn btn-danger" (click)="getPost(p)" data-toggle="modal"
+                            data-target="#excluir">Excluir</button>
+                    </div>
+                </div>
+                <br>
             </div>
-            <div class="card-footer text-muted">
-                {{p.curtidas}} curtidas
-            </div>
-            <div class="card-footer">
-                <button type="button" class="btn btn-warning mr-3" (click)="getPost(p)" data-toggle="modal"
-                data-target="#editar">Editar postagem</button>
-
-                <button type="button" class="btn btn-danger" (click)="getPost(p)" data-toggle="modal"
-                data-target="#excluir">Excluir postagem</button>                
-            </div>
-        </div>            
-        <br>
+        </div>
+        <div *ngIf="isCientista" class="col-md-6">  
+            <app-lista-artigo></app-lista-artigo>
+        </div>
     </div>
 </div>
 

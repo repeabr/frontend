@@ -22,6 +22,10 @@ import { CadastroInteresseComponent } from './cadastro-interesse/cadastro-intere
 import { ArtigoComponent } from './artigo/artigo.component';
 import { ListaPostsComponent } from './lista-posts/lista-posts.component';
 import { PostPerfilComponent } from './post-perfil/post-perfil.component';
+import { ListaArtigoComponent } from './lista-artigo/lista-artigo.component';
+import { ArtigoInicialComponent } from './artigo-inicial/artigo-inicial.component';
+import { ArtigosPerfilComponent } from './artigos-perfil/artigos-perfil.component';
+import { ArtigoPerfilComponent } from './artigo-perfil/artigo-perfil.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +43,11 @@ import { PostPerfilComponent } from './post-perfil/post-perfil.component';
     CadastroInteresseComponent,
     ArtigoComponent,
     ListaPostsComponent,
-    PostPerfilComponent
+    PostPerfilComponent,
+    ListaArtigoComponent,
+    ArtigoInicialComponent,
+    ArtigosPerfilComponent,
+    ArtigoPerfilComponent
   ],
   imports: [
     HttpClientModule,

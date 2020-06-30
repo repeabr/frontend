@@ -1,0 +1,22 @@
+<div class="card text-center">
+    <div class="card-header">
+        <b>
+        {{artigo.publicacao?.titulo}}
+        </b>
+    </div>
+    <div class="card-footer text-muted">
+      {{artigo.publicacao?.localDaPublicacao}} - {{artigo.publicacao?.anoDaPublicacao}}
+    </div>
+    <div class="card-footer text-muted">
+      <div class="card-text">
+        <span *ngIf="artigo.docName"><b><i style="font-size:24px" class="fa">&#xf15b;</i>
+                {{artigo.docName}}</b></span>
+    </div>
+      <br>
+      {{artigo?.curtidas}} pessoa(s) curtiram
+      <div class="float-right">                                
+          <button type="button" class="btn btn-info" (click)="botao(artigo.id)">{{status}} artigo</button>
+      </div>
+  </div>
+</div>
+<br>

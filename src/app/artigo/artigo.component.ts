@@ -46,8 +46,10 @@ export class ArtigoComponent implements OnInit {
     if(this.publicacao.anoDaPublicacao != "" 
     && this.publicacao.localDaPublicacao != "" 
     && this.publicacao.titulo != ""){
+      this.artigo.curtidas = 0;
       this.artigo.publicacao = this.publicacao;
       this.artigo.emailAutor = localStorage.getItem("email");
+
       this.artigoService.criaArtigo(this.artigo).subscribe(
         data => {
           this.publicacao.anoDaPublicacao = "";
@@ -55,7 +57,6 @@ export class ArtigoComponent implements OnInit {
           this.publicacao.tags = "";
           this.publicacao.titulo = "";
           this.publicacao.url = "";
-
           this.onUpload(data);
 
           this.getArtigos();
@@ -109,14 +110,13 @@ export class ArtigoComponent implements OnInit {
   getArtigo(artigo: Artigo){    
     this.artigoService.buscaArtigoPorId(artigo.id).subscribe(
       data => {
-        this.artigo = data;
+        this.auxArtigo = data;
         this.auxPublicacao = data.publicacao;
         this.httpClient.get('https://server-r.herokuapp.com/redesocial/artigo/arquivo/FiPorArtigo/'+ (artigo.id))
               .subscribe(
                 data => {
                   if(data != null){
                     this.aux = data;
-                    this.artigo.docName = this.aux.docName;
                   }
                   
                 }
@@ -128,13 +128,13 @@ export class ArtigoComponent implements OnInit {
   editar(){
     if(this.auxPublicacao.anoDaPublicacao != ""
     && this.auxPublicacao.localDaPublicacao != "" 
-    && this.auxPublicacao.titulo != ""){ 
-      this.artigo.publicacao = this.auxPublicacao;
-      
-      this.artigoService.atualizaArtigo(this.artigo).subscribe(
+    && this.auxPublicacao.titulo != ""){       
+      this.auxArtigo.publicacao = this.auxPublicacao;
+
+      this.artigoService.atualizaArtigo(this.auxArtigo).subscribe(
         data =>{          
           if(this.mudarArq){
-            this.httpClient.get('https://server-r.herokuapp.com/redesocial/artigo/arquivo/FiPorArtigo/'+ (this.artigo.id))
+            this.httpClient.get('https://server-r.herokuapp.com/redesocial/artigo/arquivo/FiPorArtigo/'+ (this.auxArtigo.id))
               .subscribe(
                 data => {
                   this.remove = data;
@@ -146,9 +146,9 @@ export class ArtigoComponent implements OnInit {
                     }
                   );
                 }
-              );
-            
+              );            
           }
+          this.getArtigos();
           this.onUpload(data);
         }
       );
@@ -156,7 +156,8 @@ export class ArtigoComponent implements OnInit {
   }
 
   excluir(){
-    this.artigoService.removeArtigo(this.artigo).subscribe(
+    console.log(this.auxArtigo)
+    this.artigoService.removeArtigo(this.auxArtigo).subscribe(
       data => {
         this.getArtigos();
       }

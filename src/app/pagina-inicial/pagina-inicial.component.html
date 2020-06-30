@@ -62,18 +62,18 @@
     <div class="col-md-3">
         <h5 class="mb-3">Seguidores</h5>
         <div style="height: 200px; overflow-y: auto; ">
-            <ul class="list-group" *ngFor="let x of seguidores;">
-                <li class="list-group-item">{{x.infos?.nomePessoa}}</li>
-            </ul>
+            <div class="list-group" *ngFor="let x of seguidores;">
+                <button class="btn btn-dark" (click)="goToPerfil(x)">{{x.infos?.nomePessoa}}</button>
+            </div>
         </div>
 
         <hr>
 
         <h5 class="my-3">Seguindo</h5>
         <div style="height: 200px;  overflow-y: auto;">
-            <ul class="list-group" *ngFor="let x of seguindo;">
-                <li class="list-group-item">{{x.infos?.nomePessoa}}</li>
-            </ul>
+            <div class="btn-group" *ngFor="let x of seguindo;">
+                <button class="btn btn-dark" (click)="goToPerfil(x)">{{x.infos?.nomePessoa}}</button>
+            </div>
         </div>
     </div>
 </div>

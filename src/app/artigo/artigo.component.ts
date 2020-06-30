@@ -45,7 +45,8 @@ export class ArtigoComponent implements OnInit {
   onSubmit(){
     if(this.publicacao.anoDaPublicacao != "" 
     && this.publicacao.localDaPublicacao != "" 
-    && this.publicacao.titulo != ""){
+    && this.publicacao.titulo != ""
+    && this.auxPublicacao.resumo != ""){
       this.artigo.curtidas = 0;
       this.artigo.publicacao = this.publicacao;
       this.artigo.emailAutor = localStorage.getItem("email");
@@ -57,6 +58,7 @@ export class ArtigoComponent implements OnInit {
           this.publicacao.tags = "";
           this.publicacao.titulo = "";
           this.publicacao.url = "";
+          this.publicacao.resumo = "";
           this.onUpload(data);
 
           this.getArtigos();
@@ -128,7 +130,8 @@ export class ArtigoComponent implements OnInit {
   editar(){
     if(this.auxPublicacao.anoDaPublicacao != ""
     && this.auxPublicacao.localDaPublicacao != "" 
-    && this.auxPublicacao.titulo != ""){       
+    && this.auxPublicacao.titulo != ""
+    && this.auxPublicacao.resumo != ""){       
       this.auxArtigo.publicacao = this.auxPublicacao;
 
       this.artigoService.atualizaArtigo(this.auxArtigo).subscribe(

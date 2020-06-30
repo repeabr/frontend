@@ -9,6 +9,7 @@ import { ArtigoService } from '../service/artigo.service';
 export class ListaArtigoComponent implements OnInit {
 
   listaDeArtigo = [];
+  temArtigo;
 
   constructor(private artigoService: ArtigoService) { }
 
@@ -24,6 +25,11 @@ export class ListaArtigoComponent implements OnInit {
           if(this.listaDeArtigo[i].curtidas == null) {
             this.listaDeArtigo[i].curtidas = 0;
           }          
+        }
+        if (this.listaDeArtigo.length == 0) {
+          this.temArtigo = false;
+        } else if (this.listaDeArtigo.length > 0){
+          this.temArtigo = true;
         }
       }
     );

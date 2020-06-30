@@ -10,10 +10,11 @@
         </div>    
     </form>
     
-    <div *ngIf="temPost" class="row">
+    <div  class="row">
         <div *ngIf="!isCientista" class="col-md-12">
             <br>
             <h3 >Mensagens mais curtidas</h3>
+            <div *ngIf="!temPost">Não há mensagens postadas.</div>
             <div *ngFor="let p of listaPosts">
                 <div class="card text-center">
                     <div class="card-body">
@@ -36,6 +37,7 @@
         <div *ngIf="isCientista" class="col-md-6">
             <br>
             <h3>Mensagens mais curtidas</h3>
+            <div *ngIf="!temPost">Não há mensagens postadas.</div>
             <div *ngFor="let p of listaPosts">
                 <div class="card text-center">
                     <div class="card-body">

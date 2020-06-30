@@ -33,8 +33,7 @@ export class InfoAdicionais {
     nomePessoa: string;
     dataNascimento: string;
     dataInicioCientista: string;
-    cpf: string;
-    rg: string;
+    identidade: string;
 }
 
 export class Glossario{
@@ -74,6 +73,7 @@ export class Publicacao{
     anoDaPublicacao: string;
     url: string;
     tags: string;
+    resumo: string;
 }
 
 export class Notificacao{

@@ -19,7 +19,9 @@ export class ListaPostsComponent implements OnInit {
   getListaPost(){
     this.postService.getPosts(localStorage.getItem("emailPerfil")).subscribe(
       data => {
-        this.listaPostPessoa = data;
+        this.listaPostPessoa = data.slice(0,10).sort(function (a, b) {	
+          return (a.curtidas < b.curtidas) ? 1 : ((b.curtidas < a.curtidas) ? -1 : 0);
+        });
       }
     );
   }

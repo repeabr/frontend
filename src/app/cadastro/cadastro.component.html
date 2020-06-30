@@ -91,22 +91,22 @@
                         </div>
                         <div class="form-group row">
                             <input type="text" class="form-control" name="nomeInstituicao"
-                                [(ngModel)]="trabalho.nomeInstituicao" placeholder="Instituição onde trabalha"
+                                [(ngModel)]="trabalho.nomeInstituicao" placeholder="Instituição onde realiza pesquisa"
                                 [required]="true">
                         </div>
 
                         <div class="form-group row">
                             <input type="text" class="form-control" name="nivelFormacao"
-                                [(ngModel)]="formacao.nivelDeFormacao" placeholder="Nível de Formacao" [required]="true">
+                                [(ngModel)]="formacao.nivelDeFormacao" placeholder="Nível de formação" [required]="true">
                         </div>
 
                         <div class="form-group row">
                             <input type="text" class="form-control" name="localFormacao"
-                                [(ngModel)]="formacao.localDeFormacao" placeholder="Local de Formacao" [required]="true">
+                                [(ngModel)]="formacao.localDeFormacao" placeholder="Local de formação" [required]="true">
                         </div>
                         <div class="form-group row">
                             <input type="url" class="form-control" name="curriculo" [(ngModel)]="curriculo.link"
-                                placeholder="Link para seu Curriculo Lattes" [required]="true">
+                                placeholder="Link para seu Currículo Lattes" [required]="true">
                         </div>
                     </div>
                 </div>
@@ -165,12 +165,8 @@
                     </div>
 
                     <div class="form-group row">
-                        <input type="text" class="form-control" name="nomePessoa" [(ngModel)]="infos.rg"
-                            placeholder="RG" [required]="true">
-                    </div>
-                    <div class="form-group row">
-                        <input type="text" class="form-control" name="nomePessoa" [(ngModel)]="infos.cpf"
-                            placeholder="CPF" [required]="true">
+                        <input type="text" class="form-control" name="nomePessoa" [(ngModel)]="infos.identidade"
+                            placeholder="RG ou CPF" [required]="true">
                     </div>
                 </div>
 

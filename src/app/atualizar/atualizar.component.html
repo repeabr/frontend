@@ -35,7 +35,7 @@
         </div>
 
         <div *ngIf="cientista" class="form-group row">
-            <label for="nomeInstituicao">Nome da instituição onde trabalha:</label>
+            <label for="nomeInstituicao">Instituição onde realiza pesquisa:</label>
             <input id="nomeInstituicao" type="text" [(ngModel)]="trabalho.nomeInstituicao" 
             class="form-control" name="nomeInstituicao" [required]="true">
         </div>
@@ -60,12 +60,9 @@
             [required]="true">
         </div>
         <div *ngIf="!cientista" class="form-group row">
-            <label for="rg">RG:</label>
-            <input id="rg" type="text" [(ngModel)]="infos.rg" class="form-control" name="rg" [required]="true">
-        </div>
-        <div *ngIf="!cientista" class="form-group row">
-            <label for="cpf">CPF:</label>
-            <input id="cpf" type="text" [(ngModel)]="infos.cpf" class="form-control" name="cpf" [required]="true">
+            <label for="identidade">RG ou CPF:</label>
+            <input id="identidade" type="text" [(ngModel)]="infos.identidade" class="form-control" name="identidade"
+            [required]="true">
         </div>
 
         <div class="form-group row">

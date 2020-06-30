@@ -20,9 +20,9 @@ export class PostComponent implements OnInit {
   auxPost: Post = new Post();
   auxPublicacao: Publicacao = new Publicacao();
 
-  isCientista = false;
+  isCientista: boolean = false;
 
-  constructor(private postService: PostService, private pessoaService: PessoaService) {     
+  constructor(private postService: PostService, private pessoaService: PessoaService) {  
   }
 
   ngOnInit() {
@@ -49,7 +49,6 @@ export class PostComponent implements OnInit {
         } else {
           this.isCientista = true;
         }
-        console.log(this.isCientista);
       }
     );
   }

@@ -8,6 +8,9 @@
         <h5 class="h5">
             Perfil de {{info?.nomePessoa}}
         </h5>
+        
+        <img src="https://www.pngitem.com/pimgs/m/294-2947257_interface-icons-user-avatar-profile-user-avatar-png.png"
+            height="100" alt="avatar" style="margin-right: 90px;">
         <button *ngIf="!seguir" class="btn btn-dark my-3" (click)="follow(pessoa.id)">Seguir</button>
         <button *ngIf="seguir" class="btn btn-secondary my-3" (click)="undoFollow(pessoa.id)">Deixar de seguir</button>
 
@@ -51,7 +54,7 @@
     </div>
     
     <div class="col-md-4">
-        <h4 class="mb-3">Posts</h4>
+        <h4 class="mb-3">Mensagens</h4>
         <div *ngIf="temPost">   
             <app-lista-posts></app-lista-posts>
         </div>
@@ -60,7 +63,7 @@
         </div>
     </div>
 
-    <div class="col-md-4" *ngIf="isCientista">
+    <div class="col-md-4" *ngIf="verifica">
         <h4 class="mb-3">Artigos</h4>
         <div *ngIf="temArtigo">
             <app-artigos-perfil></app-artigos-perfil>               

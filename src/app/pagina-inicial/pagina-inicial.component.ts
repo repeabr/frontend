@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PessoaService } from '../service/pessoa.service';
 import { Pessoa, InfoAdicionais, Curriculo, Formacao, Trabalho, Notificacao } from '../model/model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pagina-inicial',
@@ -32,7 +33,7 @@ export class PaginaInicialComponent implements OnInit {
 
   isCientista = false;
 
-  constructor(private pessoaService: PessoaService) {
+  constructor(private pessoaService: PessoaService, private router: Router) {
   }
 
   ngOnInit() {
@@ -61,6 +62,11 @@ export class PaginaInicialComponent implements OnInit {
         } 
       }
     );
+  }
+
+  goToPerfil(x: any){
+    localStorage.setItem("emailPerfil", x.email);
+    this.router.navigateByUrl("perfil");
   }
 
   getSeguindo(id: any){

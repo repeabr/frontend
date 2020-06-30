@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Artigo } from '../model/model';
 import { ArtigoService } from '../service/artigo.service';
+import { HttpClient } from '@angular/common/http';
+import { AnonymousSubject } from 'rxjs/internal/Subject';
 
 @Component({
   selector: 'app-artigo-perfil',
@@ -11,9 +13,9 @@ export class ArtigoPerfilComponent implements OnInit {
 
   @Input() artigo: Artigo;
   status: any;
-  
+  documento: any;
 
-  constructor(private artigoService: ArtigoService) { }
+  constructor(private artigoService: ArtigoService, private httpClient: HttpClient) { }
 
   ngOnInit() {
     this.verificar();
@@ -33,6 +35,15 @@ export class ArtigoPerfilComponent implements OnInit {
 
   verificar(){
     this.analiseArtigo(this.artigo.id, +(localStorage.getItem("idUsuario")));
+    this.artigoService.buscaArtigoPorId(this.artigo.id).subscribe(
+      data => {
+        this.httpClient.get('https://server-r.herokuapp.com/redesocial/artigo/arquivo/FiPorArtigo/'+ (this.artigo.id)).subscribe(
+          data => {
+            this.documento = data;
+          }
+        );
+      }
+    );
   }
 
   botao(idPostCurtido: number){
@@ -41,6 +52,15 @@ export class ArtigoPerfilComponent implements OnInit {
         data => {
           this.artigo = data;
           this.analiseArtigo(this.artigo.id ,+(localStorage.getItem("idUsuario")));
+          this.artigoService.buscaArtigoPorId(this.artigo.id).subscribe(
+            data => {
+              this.httpClient.get('https://server-r.herokuapp.com/redesocial/artigo/arquivo/FiPorArtigo/'+ (this.artigo.id)).subscribe(
+                data => {
+                  this.documento = data;
+                }
+              );
+            }
+          );
         }
       );
     } else if (this.status == "Descurtir") {
@@ -48,6 +68,15 @@ export class ArtigoPerfilComponent implements OnInit {
         data => {
           this.artigo = data;
           this.analiseArtigo(this.artigo.id ,+(localStorage.getItem("idUsuario")));
+          this.artigoService.buscaArtigoPorId(this.artigo.id).subscribe(
+            data => {
+              this.httpClient.get('https://server-r.herokuapp.com/redesocial/artigo/arquivo/FiPorArtigo/'+ (this.artigo.id)).subscribe(
+                data => {
+                  this.documento = data;
+                }
+              );
+            }
+          );
         }
       );
     }

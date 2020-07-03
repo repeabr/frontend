@@ -26,7 +26,9 @@ export class ArtigosPerfilComponent implements OnInit {
     let temArquivo: boolean = false;
     this.artigoService.buscaArtigoPorEmail(localStorage.getItem("emailPerfil")).subscribe(
       data => {
-        this.listaArtigo = data.reverse();
+        this.listaArtigo = data.slice(0,10).sort(function (a, b) {	
+          return (a.curtidas < b.curtidas) ? 1 : ((b.curtidas < a.curtidas) ? -1 : 0);
+        });
         if(this.listaArtigo.length == 0) {
           this.temArtigo = false;
         }

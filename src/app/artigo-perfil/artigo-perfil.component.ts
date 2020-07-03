@@ -40,7 +40,6 @@ export class ArtigoPerfilComponent implements OnInit {
         this.httpClient.get('https://server-r.herokuapp.com/redesocial/artigo/arquivo/FiPorArtigo/'+ (this.artigo.id)).subscribe(
           data => {
             this.documento = data;
-            console.log(this.artigo.id);
           }
         );
       }

@@ -14,15 +14,15 @@ export class ListaArtigoComponent implements OnInit {
   constructor(private artigoService: ArtigoService) { }
 
   ngOnInit() {
-    this.getListaPost();
+    this.getListaArtigo();
   }
 
-  getListaPost(){
+  getListaArtigo(){
     this.artigoService.buscaArtigoPorEmail(localStorage.getItem("email")).subscribe(
       data => {
-        this.listaDeArtigo = data.slice(0,10).sort(function (a, b) {	
+        this.listaDeArtigo = data.sort(function (a, b) {	
           return (a.curtidas < b.curtidas) ? 1 : ((b.curtidas < a.curtidas) ? -1 : 0);
-        });
+        }).slice(0,10);
         for (let i = 0; i < this.listaDeArtigo.length; i++) {
           if(this.listaDeArtigo[i].curtidas == null) {
             this.listaDeArtigo[i].curtidas = 0;

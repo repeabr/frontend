@@ -31,6 +31,7 @@ export class PostComponent implements OnInit {
         this.listaPosts = data.slice(0,10).sort(function (a, b) {	
           return (a.curtidas < b.curtidas) ? 1 : ((b.curtidas < a.curtidas) ? -1 : 0);
         });
+        console.log("Posts: ", this.listaPosts);
         if(data.length == 0){
           this.temPost = false;
         } else {

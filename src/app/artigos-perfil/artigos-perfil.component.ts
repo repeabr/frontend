@@ -19,16 +19,15 @@ export class ArtigosPerfilComponent implements OnInit {
 
   ngOnInit() {
     this.getListaArtigos();
-    console.log(this.listaArtigo);
   }
 
   getListaArtigos(){    
     let temArquivo: boolean = false;
     this.artigoService.buscaArtigoPorEmail(localStorage.getItem("emailPerfil")).subscribe(
       data => {
-        this.listaArtigo = data.slice(0,10).sort(function (a, b) {	
+        this.listaArtigo = data.sort(function (a, b) {	
           return (a.curtidas < b.curtidas) ? 1 : ((b.curtidas < a.curtidas) ? -1 : 0);
-        });
+        }).slice(0,10);
         if(this.listaArtigo.length == 0) {
           this.temArtigo = false;
         }
